@@ -8,6 +8,7 @@ import {
   isValidEmail,
   MIN_PASSWORD_LENGTH,
 } from '@/lib/auth'
+import Logo from '@/components/logo'
 
 type Errors = Partial<Record<'name' | 'email' | 'password' | 'confirmPassword', string>>
 
@@ -58,13 +59,7 @@ export default function RegisterPage() {
       <main className="auth-page">
         <div className="auth-shell">
           <section className="auth-aside" aria-label="Tentang aplikasi HealTI">
-            <div className="auth-brand">
-              <div className="auth-brand-mark"><Plus aria-hidden="true" /></div>
-              <div>
-                <strong>HealTI</strong>
-                <span>APOTEK SEHAT</span>
-              </div>
-            </div>
+            <Logo size={48} onDark />
             <h1>Pendaftaran berhasil dikirim.</h1>
             <p>Akun Anda sudah tercatat dan sedang menunggu persetujuan dari Owner apotek.</p>
             <ul className="auth-points">
@@ -116,13 +111,7 @@ export default function RegisterPage() {
     <main className="auth-page">
       <div className="auth-shell">
         <section className="auth-aside" aria-label="Tentang aplikasi HealTI">
-          <div className="auth-brand">
-            <div className="auth-brand-mark"><Plus aria-hidden="true" /></div>
-            <div>
-              <strong>HealTI</strong>
-              <span>APOTEK SEHAT</span>
-            </div>
-          </div>
+          <Logo size={48} onDark />
 
           <h1>Buat akun untuk tim apotek Anda.</h1>
           <p>Setiap akun baru akan berstatus Staff Administrasi dan menunggu persetujuan Owner sebelum dapat digunakan.</p>

@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import { clearSession, initialsOf, readSession, type Session } from '@/lib/auth'
 import { canAccess, permissionFromPath, type Permission } from '@/lib/permissions'
+import Logo from '@/components/logo'
 
 type NavItem = {
   path: string
@@ -30,8 +31,7 @@ const NAV_ITEMS: NavItem[] = [
 function Brand() {
   return (
     <div className="brand">
-      <div className="brand-mark"><Plus aria-hidden="true" /></div>
-      <div><strong>HealTI</strong><span>APOTEK SEHAT</span></div>
+      <Logo size={40} />
     </div>
   )
 }

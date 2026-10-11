@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { AlertCircle, ArrowRight, CheckCircle2, Eye, EyeOff, Info, Plus } from 'lucide-react'
 import { authenticate, DEMO_ACCOUNTS, initialsOf, writeSession } from '@/lib/auth'
 import { defaultPathForRole } from '@/lib/permissions'
+import Logo from '@/components/logo'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -48,13 +49,7 @@ export default function LoginPage() {
     <main className="auth-page">
       <div className="auth-shell">
         <section className="auth-aside" aria-label="Tentang aplikasi HealTI">
-          <div className="auth-brand">
-            <div className="auth-brand-mark"><Plus aria-hidden="true" /></div>
-            <div>
-              <strong>HealTI</strong>
-              <span>APOTEK SEHAT</span>
-            </div>
-          </div>
+          <Logo size={48} onDark />
 
           <h1>Kelola apotek dengan lebih rapi dan aman.</h1>
           <p>Satu tempat untuk memantau stok obat, transaksi, hingga laporan penjualan apotek Anda.</p>
