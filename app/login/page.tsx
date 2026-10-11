@@ -4,6 +4,7 @@ import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import { AlertCircle, ArrowRight, CheckCircle2, Eye, EyeOff, Info, Plus } from 'lucide-react'
 import { authenticate, DEMO_ACCOUNTS, initialsOf, writeSession } from '@/lib/auth'
+import { defaultPathForRole } from '@/lib/permissions'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -33,7 +34,8 @@ export default function LoginPage() {
 
     writeSession(session)
     // Muat ulang penuh (bukan pushState) supaya cookie pasti dibaca proxy.
-    window.location.assign('/dashboard')
+    // Arahkan ke halaman pertama yang diizinkan role tersebut.
+    window.location.assign(defaultPathForRole(session.role))
   }
 
   function fillDemo(demoEmail: string, demoPassword: string) {

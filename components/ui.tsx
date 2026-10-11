@@ -1,0 +1,7 @@
+import { X } from 'lucide-react'
+
+export function Status({ tone, children }: { tone: string; children: React.ReactNode }) { return <span className={`status-pill ${tone}`}><i />{children}</span> }
+export function Button({ children, secondary = false, onClick }: { children: React.ReactNode; secondary?: boolean; onClick?: () => void }) { return <button className={secondary ? 'outline-button' : 'primary-button'} onClick={onClick}>{children}</button> }
+export function Modal({ title, description, onClose, children }: { title: string; description?: string; onClose: () => void; children: React.ReactNode }) { return <div className="modal-backdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div className="modal-header"><div><h2 id="modal-title">{title}</h2>{description && <p>{description}</p>}</div><button className="modal-close" onClick={onClose} aria-label="Tutup popup"><X /></button></div>{children}</section></div> }
+export function Field({ label, children }: { label: string; children: React.ReactNode }) { return <label className="field"><span>{label}</span>{children}</label> }
+export function DataTable({ children }: { children: React.ReactNode }) { return <div className="table-scroll"><table>{children}</table></div> }

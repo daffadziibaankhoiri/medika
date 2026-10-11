@@ -213,4 +213,14 @@ button { cursor: pointer; }
   .landing-hero { padding: 10px 20px 50px; }
   .landing-actions { flex-direction: column; }
   .landing-primary, .landing-secondary { justify-content: center; }
-}
+}.access-denied { display: flex; align-items: center; justify-content: center; min-height: 420px; padding: 30px 20px; }
+.access-denied-card { max-width: 520px; text-align: center; background: #fff; border: 1px solid #e3e9f2; border-radius: 16px; padding: 38px 34px; box-shadow: 0 14px 40px #1f355214; }
+.access-denied-icon { width: 58px; height: 58px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center; background: #fff1f0; color: #b33232; }
+.access-denied-icon svg { width: 28px; height: 28px; stroke-width: 2; }
+.access-denied-card h1 { margin: 20px 0 0; font-size: 23px; letter-spacing: -.5px; color: #1b2a43; }
+.access-denied-card > p { margin: 12px 0 0; font-size: 14px; line-height: 1.65; color: #5b6b80; }
+.access-denied-card > p strong { color: #b33232; }
+.access-denied-meta { margin: 20px 0 0; padding: 13px 15px; border-radius: 9px; background: #f6f8fb; border: 1px solid #e7ebf2; font-size: 12.5px; line-height: 1.55; color: #5b6b80; display: flex; align-items: center; gap: 9px; justify-content: center; text-align: left; }
+.access-denied-meta svg { width: 17px; height: 17px; flex: none; color: #1f6fd1; }
+.access-denied-card .landing-primary { margin-top: 24px; }
+.app-shell-loading { margin-left: 0; }
