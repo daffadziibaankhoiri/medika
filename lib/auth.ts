@@ -27,9 +27,9 @@ export type DemoAccount = {
  * Akun ini di-hardcode untuk keperluan demonstrasi tugas.
  */
 export const DEMO_ACCOUNTS: readonly DemoAccount[] = [
-  { email: 'owner@medika.id', password: 'Owner123!', name: 'Budi Santoso', role: 'Owner' },
-  { email: 'apoteker@medika.id', password: 'Apoteker123!', name: 'Siti Rahayu', role: 'Apoteker' },
-  { email: 'staff@medika.id', password: 'Staff123!', name: 'Andi Wijaya', role: 'Staff Administrasi' },
+  { email: 'owner@healti.id', password: 'Owner123!', name: 'Budi Santoso', role: 'Owner' },
+  { email: 'apoteker@healti.id', password: 'Apoteker123!', name: 'Siti Rahayu', role: 'Apoteker' },
+  { email: 'staff@healti.id', password: 'Staff123!', name: 'Andi Wijaya', role: 'Staff Administrasi' },
 ]
 
 /** Role yang otomatis diberikan kepada setiap akun baru yang mendaftar. */
@@ -38,7 +38,7 @@ export const DEFAULT_NEW_ACCOUNT_ROLE: Role = 'Staff Administrasi'
 export const MIN_PASSWORD_LENGTH = 8
 
 /** Nama cookie yang menyimpan sesi tiruan. */
-export const SESSION_COOKIE = 'medika_session'
+export const SESSION_COOKIE = 'healti_session'
 
 /** Umur sesi tiruan: 12 jam. */
 const SESSION_MAX_AGE = 60 * 60 * 12

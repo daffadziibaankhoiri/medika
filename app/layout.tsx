@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Medika | Dashboard Apotek',
+  title: 'HealTI | Dashboard Apotek',
   description: 'Sistem manajemen inventaris dan transaksi apotek.',
   generator: 'v0.app',
   icons: {

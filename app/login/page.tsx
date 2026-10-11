@@ -47,11 +47,11 @@ export default function LoginPage() {
   return (
     <main className="auth-page">
       <div className="auth-shell">
-        <section className="auth-aside" aria-label="Tentang aplikasi Medika">
+        <section className="auth-aside" aria-label="Tentang aplikasi HealTI">
           <div className="auth-brand">
             <div className="auth-brand-mark"><Plus aria-hidden="true" /></div>
             <div>
-              <strong>medika</strong>
+              <strong>HealTI</strong>
               <span>APOTEK SEHAT</span>
             </div>
           </div>
@@ -65,7 +65,7 @@ export default function LoginPage() {
             <li><CheckCircle2 aria-hidden="true" /> Laporan penjualan otomatis</li>
           </ul>
 
-          <p className="auth-aside-foot">© 2024 Medika · Sistem Manajemen Apotek</p>
+          <p className="auth-aside-foot">© 2026 HealTI · Sistem Manajemen Apotek</p>
         </section>
 
         <section className="auth-form-wrap">
@@ -84,7 +84,7 @@ export default function LoginPage() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="contoh@medika.id"
+                  placeholder="contoh@healti.id"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   required

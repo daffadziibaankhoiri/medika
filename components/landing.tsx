@@ -7,7 +7,7 @@ export function Landing({ onEnter }: { onEnter: () => void }) {
     <header className="landing-topbar">
       <div className="auth-brand">
         <div className="auth-brand-mark"><Plus aria-hidden="true" /></div>
-        <div><strong>medika</strong><span>APOTEK SEHAT</span></div>
+        <div><strong>HealTI</strong><span>APOTEK SEHAT</span></div>
       </div>
     </header>
     <div className="landing-hero"><div className="landing-hero-inner">

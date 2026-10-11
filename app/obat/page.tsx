@@ -1,8 +1,12 @@
 'use client'
 
 import AppShell from '@/components/app-shell'
-import { MedicineTable } from '@/components/views/medicine-table'
+import ObatPage from '@/components/views/obat-page'
 
-export default function MedicineTablePage() {
-  return <AppShell><MedicineTable /></AppShell>
+export default function Page() {
+  return (
+    <AppShell>
+      <ObatPage />
+    </AppShell>
+  )
 }

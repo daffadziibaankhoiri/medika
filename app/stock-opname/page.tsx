@@ -11,10 +11,10 @@ import AppShell from '@/components/app-shell'
  * Data masih statis dan seluruh aksi belum tersambung ke backend.
  */
 const stockOpnameRows = [
-  { code: 'SO-2024-0512', date: '12 Mei 2024', status: 'Selesai', tone: 'safe', total: '142 obat',PIC: 'Andi Wijaya' },
-  { code: 'SO-2024-0508', date: '08 Mei 2024', status: 'Selesai', tone: 'safe', total: '138 obat', PIC: 'Andi Wijaya' },
-  { code: 'SO-2024-0503', date: '03 Mei 2024', status: 'Diproses', tone: 'warning', total: '145 obat', PIC: 'Siti Rahayu' },
-  { code: 'SO-2024-0428', date: '28 Apr 2024', status: 'Selesai', tone: 'safe', total: '136 obat', PIC: 'Andi Wijaya' },
+  { code: 'SO-2026-0512', date: '12 Mei 2026', status: 'Selesai', tone: 'safe', total: '142 obat',PIC: 'Andi Wijaya' },
+  { code: 'SO-2026-0508', date: '08 Mei 2026', status: 'Selesai', tone: 'safe', total: '138 obat', PIC: 'Andi Wijaya' },
+  { code: 'SO-2026-0503', date: '03 Mei 2026', status: 'Diproses', tone: 'warning', total: '145 obat', PIC: 'Siti Rahayu' },
+  { code: 'SO-2026-0428', date: '28 Apr 2026', status: 'Selesai', tone: 'safe', total: '136 obat', PIC: 'Andi Wijaya' },
 ]
 
 export default function StockOpnamePage() {

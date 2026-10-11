@@ -28,7 +28,7 @@ export default function RegisterPage() {
     else if (name.trim().length < 3) next.name = 'Nama lengkap minimal 3 karakter.'
 
     if (!email.trim()) next.email = 'Email wajib diisi.'
-    else if (!isValidEmail(email)) next.email = 'Format email tidak valid. Contoh: nama@medika.id'
+    else if (!isValidEmail(email)) next.email = 'Format email tidak valid. Contoh: nama@healti.id'
 
     if (!password) next.password = 'Password wajib diisi.'
     else if (password.length < MIN_PASSWORD_LENGTH) {
@@ -57,11 +57,11 @@ export default function RegisterPage() {
     return (
       <main className="auth-page">
         <div className="auth-shell">
-          <section className="auth-aside" aria-label="Tentang aplikasi Medika">
+          <section className="auth-aside" aria-label="Tentang aplikasi HealTI">
             <div className="auth-brand">
               <div className="auth-brand-mark"><Plus aria-hidden="true" /></div>
               <div>
-                <strong>medika</strong>
+                <strong>HealTI</strong>
                 <span>APOTEK SEHAT</span>
               </div>
             </div>
@@ -72,7 +72,7 @@ export default function RegisterPage() {
               <li><CheckCircle2 aria-hidden="true" /> Role ditetapkan otomatis oleh sistem</li>
               <li><CheckCircle2 aria-hidden="true" /> Aktif setelah disetujui Owner</li>
             </ul>
-            <p className="auth-aside-foot">© 2024 Medika · Sistem Manajemen Apotek</p>
+            <p className="auth-aside-foot">© 2026 HealTI · Sistem Manajemen Apotek</p>
           </section>
 
           <section className="auth-form-wrap">
@@ -115,11 +115,11 @@ export default function RegisterPage() {
   return (
     <main className="auth-page">
       <div className="auth-shell">
-        <section className="auth-aside" aria-label="Tentang aplikasi Medika">
+        <section className="auth-aside" aria-label="Tentang aplikasi HealTI">
           <div className="auth-brand">
             <div className="auth-brand-mark"><Plus aria-hidden="true" /></div>
             <div>
-              <strong>medika</strong>
+              <strong>HealTI</strong>
               <span>APOTEK SEHAT</span>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function RegisterPage() {
             <li><CheckCircle2 aria-hidden="true" /> Diaktifkan setelah disetujui Owner</li>
           </ul>
 
-          <p className="auth-aside-foot">© 2024 Medika · Sistem Manajemen Apotek</p>
+          <p className="auth-aside-foot">© 2026 HealTI · Sistem Manajemen Apotek</p>
         </section>
 
         <section className="auth-form-wrap">
@@ -176,7 +176,7 @@ export default function RegisterPage() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="contoh@medika.id"
+                  placeholder="contoh@healti.id"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   aria-invalid={errors.email ? true : undefined}

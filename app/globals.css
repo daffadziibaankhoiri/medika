@@ -223,4 +223,85 @@ button { cursor: pointer; }
 .access-denied-meta { margin: 20px 0 0; padding: 13px 15px; border-radius: 9px; background: #f6f8fb; border: 1px solid #e7ebf2; font-size: 12.5px; line-height: 1.55; color: #5b6b80; display: flex; align-items: center; gap: 9px; justify-content: center; text-align: left; }
 .access-denied-meta svg { width: 17px; height: 17px; flex: none; color: #1f6fd1; }
 .access-denied-card .landing-primary { margin-top: 24px; }
-.app-shell-loading { margin-left: 0; }
+.app-shell-loading { margin-left: 0; }/* ==========================================================================
+   HALAMAN /obat â€” tabel obat + detail batch
+   ========================================================================== */
+.obat-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid #edf1f6; }
+.obat-toolbar .search-box { flex: 1 1 260px; width: auto; min-width: 200px; }
+.obat-toolbar .search-box svg { top: 13px; }
+.obat-toolbar .search-box input { height: 44px; font-size: 12px; }
+.obat-toolbar select { height: 44px; min-width: 170px; border: 1px solid #dfe6ef; border-radius: 8px; background: #fbfcfe; color: #405069; font-size: 12px; padding: 0 12px; }
+.obat-toolbar .filter-button { height: 44px; min-height: 44px; display: flex; align-items: center; gap: 7px; border: 1px solid #e5eaf1; background: #fff; color: #647189; border-radius: 8px; padding: 0 14px; font-size: 12px; }
+.obat-toolbar .filter-button svg { width: 14px; height: 14px; }
+
+.expand-button { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid #e5eaf1; border-radius: 7px; background: #fff; color: #2474db; }
+.expand-button:hover { background: #eef5ff; border-color: #a9c9f2; }
+.expand-button svg { width: 15px; height: 15px; }
+.obat-row.terbuka { background: #f8fbff; }
+
+.batch-detail { margin: 0 0 18px; padding: 16px 18px; background: #f8fbff; border: 1px solid #e3ecf7; border-left: 3px solid #2474db; border-radius: 10px; }
+.batch-detail-judul { margin: 0 0 12px; font-size: 12px; color: #5b6b80; }
+.batch-detail-judul strong { color: #1b2a43; }
+.batch-detail table { background: #fff; }
+.batch-detail .sku { display: block; color: #8490a5; font-size: 9px; margin-top: 4px; }
+
+.obat-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 1px solid #edf1f6; color: #5b6b80; font-size: 12px; }
+.obat-pagination .pagination-controls { display: flex; align-items: center; gap: 5px; }
+
+.obat-kosong { padding: 34px 16px !important; text-align: center; color: #5b6b80; font-size: 13px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* Modal "Terima Barang Masuk" mengikuti ukuran tombol yang bisa diakses. */
+.modal-form select, .modal-form input[type='date'], .modal-form input[type='number'] { min-height: 44px; }
+
+@media (max-width: 700px) {
+  .obat-toolbar { flex-direction: column; align-items: stretch; }
+  .obat-toolbar select, .obat-toolbar .search-box, .obat-toolbar .filter-button { width: 100%; min-width: 0; justify-content: center; }
+  .obat-pagination { flex-direction: column; align-items: stretch; text-align: center; }
+  .obat-pagination .pagination-controls { justify-content: center; }
+}.batch-row > td { padding: 0 !important; border-top: 0 !important; }
+.batch-row .batch-detail { margin: 0; border-radius: 0; border-left: 3px solid #2474db; border-top: 1px solid #e3ecf7; border-right: 1px solid #e3ecf7; border-bottom: 1px solid #e3ecf7; }
+.batch-detail table { width: 100%; border-collapse: collapse; background: #fff; }
+.batch-detail thead th { background: #eef5ff; color: #236bd0; font-size: 10px; font-weight: 700; text-align: left; text-transform: uppercase; letter-spacing: .6px; padding: 10px 14px; border-bottom: 1px solid #d9e5f6; white-space: nowrap; }
+.batch-detail tbody td { padding: 11px 14px; border-bottom: 1px solid #eef2f8; font-size: 12px; color: #405069; }
+.batch-detail tbody tr:last-child td { border-bottom: 0; }/* ==========================================================================
+   HALAMAN /kasir â€” FEFO batch + pemblokiran obat kedaluwarsa
+   ========================================================================== */
+
+/* Alert merah "Transaksi ditolak". */
+.kasir-alert { display: flex; align-items: flex-start; gap: 12px; margin: 0 0 20px; padding: 15px 17px; border: 1px solid #f0b4b4; border-left: 4px solid #b33232; border-radius: 10px; background: #fff1f0; }
+.kasir-alert > svg { width: 21px; height: 21px; flex: none; margin-top: 1px; color: #b33232; }
+.kasir-alert strong { display: block; font-size: 14px; color: #b33232; }
+.kasir-alert p { margin: 6px 0 0; font-size: 12.5px; line-height: 1.6; color: #b33232; }
+.kasir-alert-tutup { margin-top: 11px; padding: 8px 14px; min-height: 44px; border: 1px solid #b33232; border-radius: 7px; background: #fff; color: #b33232; font-size: 12px; font-weight: 700; }
+.kasir-alert-tutup:hover { background: #b33232; color: #fff; }
+.kasir-alert-note { margin: 10px 0 0; font-size: 11.5px; line-height: 1.5; color: #b33232; text-align: center; }
+
+/* Baris obat yang seluruh batch-nya kedaluwarsa. */
+.result-row.ditolak { background: #fff8f7; border-color: #f3d4d1; }
+.result-row.ditolak strong { color: #b33232; }
+.result-row.ditolak small { color: #b33232; }
+.result-row.ditolak > svg { width: 17px; height: 17px; color: #b33232; flex: none; }
+.result-row.ditolak:hover { background: #fff1f0; border-color: #e79c9c; }
+
+.kasir-kosong { padding: 22px 4px; font-size: 12.5px; color: #5b6b80; text-align: center; }
+
+/* Badge batch di dalam keranjang. */
+.cart-batch { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 5px 0; }
+.cart-batch > span { font-size: 10px; color: #5b6b80; }
+.cart-batch-lot { display: inline-block; padding: 2px 7px; border-radius: 999px; background: #eef5ff; color: #236bd0; font-weight: 700; font-family: Consolas, Monaco, monospace; }
+.cart-batch-status { padding: 2px 7px; border-radius: 999px; font-weight: 700; }
+.cart-batch-status.aman { background: #e9f8f1; color: #1f7a58; }
+.cart-batch-status.segera { background: #fff5df; color: #8a5f00; }
+.cart-batch-status.kadaluwarsa { background: #fff1f0; color: #b33232; }
+
+.cart-remove { align-self: center; padding: 5px 9px; border: 1px solid #f0b4b4; border-radius: 6px; background: #fff; color: #b33232; font-size: 10px; font-weight: 700; }
+.cart-remove:hover { background: #fff1f0; }
+
+.kasir-simpan { width: 100%; justify-content: center; margin-top: 16px; }
+.kasir-simpan:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; }
+
+@media (max-width: 600px) {
+  .kasir-simpan { width: 100%; }
+}
