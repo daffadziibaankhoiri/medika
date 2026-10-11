@@ -65,3 +65,152 @@ button { cursor: pointer; }
 @media (max-width: 600px) { .medicine-filters { grid-template-columns:1fr; gap:10px; }.medicine-filters .filter-button { justify-self:stretch; }.medicine-filters + .pagination { flex-wrap:wrap; }.medicine-panel { padding:20px 15px 15px; } .page-wrap { padding:24px 15px 40px; }.topbar { height:64px; padding:0 15px; }.page-heading { align-items:flex-start; flex-direction:column; gap:18px; }.page-heading h1 { font-size:24px; }.primary-button { width:100%; justify-content:center; }.stats-grid { grid-template-columns:1fr 1fr; gap:10px; }.stat-card { padding:14px 12px; min-height:116px; gap:9px; }.stat-icon { width:32px; height:32px; }.stat-icon svg { width:16px; }.stat-copy p { font-size:9px; }.stat-copy strong { font-size:18px; }.stat-copy span { font-size:9px; }.stat-menu { right:9px; }.panel { padding:18px 15px; }.panel-header { gap:10px; }.panel-header p { line-height:1.4; }.sales-total strong { font-size:18px; }.sales-total { flex-wrap:wrap; }.select-button { font-size:9px; }.alert-item strong { font-size:10px; }.table-title .outline-button { display:none; }.table-toolbar { gap:9px; }.search-box { flex:1; }.filter-button { padding:8px; }.breadcrumbs span,.breadcrumbs strong { display:none; }.top-actions { gap:12px; } }
 .panel > .table-toolbar:not(.medicine-filters), .panel > .pagination, .panel > .filter-button, .panel .table-title .outline-button { display:none !important; }.medicine-filters { display:grid; grid-template-columns:minmax(240px,1fr) 180px 180px auto; align-items:center; gap:16px; margin:20px 0 0; padding:24px 30px 0; background:#fff; border:1px solid #e2e8f0; border-bottom:0; border-radius:12px 12px 0 0; position:relative; z-index:2; }.medicine-filters .search-box { width:100%; }.medicine-filters select { width:100%; min-width:0; height:42px; border:1px solid #dfe6ef; border-radius:8px; background:#fff; color:#52627b; padding:10px 12px; font-size:11px; outline:none; }.medicine-filters select:focus { border-color:#82afe9; box-shadow:0 0 0 3px #eaf3ff; }.medicine-filters .filter-button { justify-self:end; min-width:64px; height:42px; justify-content:center; flex:none; }.medicine-filters + .pagination { display:none !important; }.medicine-filters + .pagination .pagination-controls { order:2; margin-left:auto; }.medicine-filters + .pagination span { order:1; }.medicine-filters + .pagination + .panel { margin-top:0; border-top-left-radius:0; border-top-right-radius:0; border-bottom-left-radius:12px; border-bottom-right-radius:12px; box-shadow:0 2px 10px #233b5810; }.medicine-panel { border-radius:12px; padding:28px 30px 18px; box-shadow:0 2px 10px #233b5810; }.medicine-panel .table-toolbar { margin-top:18px; }.medicine-panel table th { padding-top:12px; padding-bottom:12px; }.medicine-panel table td { padding-top:16px; padding-bottom:16px; }
 .pagination { display:none !important; }.pagination-controls { display:flex; align-items:center; gap:5px; }.pagination-button { min-width:28px; height:28px; padding:0 8px; border:1px solid #e3e9f1; border-radius:6px; background:#fff; color:#65748c; font-size:10px; }.pagination-button:hover:not(:disabled), .pagination-button.active { border-color:#2474db; background:#eef5ff; color:#2474db; }.pagination-button:disabled { cursor:not-allowed; opacity:.45; }\n.notification-menu { position:relative; }.notification-button { position:relative; }.notification-dot { position:absolute; top:-5px; right:-5px; min-width:16px; height:16px; padding:0 4px; border-radius:999px; display:grid; place-items:center; background:#e45454; color:#fff; font-size:9px; font-weight:700; border:2px solid #fff; }.notification-popover { position:absolute; top:44px; right:-8px; z-index:20; width:min(370px, calc(100vw - 30px)); background:#fff; border:1px solid #e3e9f2; border-radius:14px; box-shadow:0 20px 50px #1f355225; overflow:hidden; }.notification-popover-header { display:flex; justify-content:space-between; align-items:flex-start; gap:15px; padding:17px 18px 14px; border-bottom:1px solid #edf1f6; }.notification-popover-header strong,.notification-popover-header span { display:block; }.notification-popover-header strong { color:#21344f; font-size:14px; }.notification-popover-header span { margin-top:4px; color:#8997aa; font-size:10px; }.notification-popover-header .link-button { white-space:nowrap; }.notification-items { display:flex; flex-direction:column; }.notification-item { display:flex; gap:11px; padding:14px 18px; border-bottom:1px solid #f0f3f7; }.notification-item:hover { background:#f8fbff; }.notification-icon { width:30px; height:30px; flex:none; display:grid; place-items:center; border-radius:8px; }.notification-icon svg { width:16px; }.notification-item.danger .notification-icon { background:#fff0ef; color:#d94d4d; }.notification-item.warning .notification-icon { background:#fff7e6; color:#d99820; }.notification-item strong,.notification-item span,.notification-item small { display:block; }.notification-item strong { color:#2b3c54; font-size:11px; }.notification-item span { margin-top:4px; color:#78889e; font-size:10px; line-height:1.4; }.notification-item small { margin-top:6px; color:#b0bac8; font-size:9px; }.notification-footer { width:100%; display:flex; justify-content:center; align-items:center; gap:6px; padding:12px; border:0; background:#fbfcfe; color:#2473d8; font-size:11px; font-weight:700; cursor:pointer; }.notification-footer svg { width:13px; }
+/* ==========================================================================
+   AUTH (/login, /register) + PROFILE MENU
+   Ditambahkan di akhir file; tidak mengubah aturan yang sudah ada di atas.
+
+   Palet di sini sengaja memakai nilai yang lebih gelap dari palet utama agar
+   semua teks lolos rasio kontras minimal 4.5:1 (WCAG AA):
+     - label/teks        #5b6b80  di atas #ffffff  = 5.44:1
+     - link              #1f6fd1  di atas #ffffff  = 4.94:1
+     - error             #b33232  di atas #fff1f0  = 5.58:1
+     - sukses            #1f7a58  di atas #e9f8f1  = 4.81:1
+     - tombol utama      #ffffff di atas #2474db   = 4.57:1
+     - border input      #8490a5  di atas #fbfcfe  = 3.14:1 (non-teks, min 3:1)
+     - focus ring        #1c68c9  di atas #ffffff  = 5.42:1
+   ========================================================================== */
+
+/* --- Layout halaman auth (tanpa sidebar) ------------------------------- */
+.auth-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; background: #f6f8fb; }
+.auth-shell { width: min(1000px, 100%); display: grid; grid-template-columns: 1fr 1fr; background: #fff; border: 1px solid #e3e9f2; border-radius: 18px; overflow: hidden; box-shadow: 0 22px 60px #1f35521f; }
+
+/* --- Panel kiri: identitas + gradient biru-hijau ----------------------- */
+.auth-aside { position: relative; padding: 44px 40px; color: #fff; background: linear-gradient(155deg, #2474db 0%, #2c8fc9 45%, #1f7a58 100%); display: flex; flex-direction: column; }
+.auth-brand { display: flex; align-items: center; gap: 11px; }
+.auth-brand-mark { width: 38px; height: 38px; border-radius: 11px; background: #ffffffe6; color: #2474db; display: grid; place-items: center; box-shadow: 0 6px 16px #16304f33; }
+.auth-brand-mark svg { width: 20px; height: 20px; stroke-width: 2.4; }
+.auth-brand strong { display: block; font-size: 17px; letter-spacing: -.3px; }
+.auth-brand span { display: block; font-size: 9px; letter-spacing: 1.5px; margin-top: 3px; color: #eaf4ff; }
+.auth-aside h1 { margin: 40px 0 0; font-size: 27px; line-height: 1.25; letter-spacing: -.7px; }
+.auth-aside > p { margin: 14px 0 0; font-size: 13px; line-height: 1.65; color: #eaf4ff; }
+.auth-points { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-direction: column; gap: 13px; }
+.auth-points li { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: #ffffff; }
+.auth-points svg { width: 17px; height: 17px; flex: none; padding: 3px; border-radius: 50%; background: #ffffff26; stroke-width: 2.6; }
+.auth-aside-foot { margin-top: auto; padding-top: 32px; font-size: 11px; color: #eaf4ff; }
+
+/* --- Panel kanan: form -------------------------------------------------- */
+.auth-form-wrap { padding: 44px 40px; display: flex; flex-direction: column; }
+.auth-heading { margin-bottom: 26px; }
+.auth-heading h2 { margin: 0; font-size: 22px; letter-spacing: -.5px; color: #1b2a43; }
+.auth-heading p { margin: 8px 0 0; font-size: 13px; line-height: 1.55; color: #5b6b80; }
+
+.auth-field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 17px; }
+.auth-label { font-size: 12.5px; font-weight: 700; color: #5b6b80; }
+.auth-input-wrap { position: relative; display: flex; align-items: center; }
+.auth-input { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid #8490a5; border-radius: 9px; background: #fbfcfe; color: #17243b; font-size: 14px; outline: none; transition: border-color .15s, background .15s; }
+.auth-input::placeholder { color: #6b7a90; }
+.auth-input:hover { border-color: #6b7a90; }
+.auth-input:focus { border-color: #1c68c9; background: #fff; }
+.auth-input.has-toggle { padding-right: 54px; }
+.auth-input[aria-invalid='true'] { border-color: #b33232; background: #fff8f7; }
+
+/* Tombol lihat/sembunyikan password - target sentuh minimal 44px. */
+.auth-toggle { position: absolute; right: 2px; display: grid; place-items: center; width: 44px; height: 44px; min-width: 44px; min-height: 44px; border: 0; border-radius: 8px; background: transparent; color: #5b6b80; }
+.auth-toggle:hover { background: #eef5ff; color: #1c68c9; }
+.auth-toggle svg { width: 18px; height: 18px; }
+
+.auth-submit { width: 100%; min-height: 48px; margin-top: 4px; border: 0; border-radius: 9px; background: #2474db; color: #fff; font-size: 14px; font-weight: 700; box-shadow: 0 6px 16px #2474db33; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background .15s; }
+.auth-submit:hover:not(:disabled) { background: #1c68c9; }
+.auth-submit:disabled { opacity: .6; cursor: not-allowed; }
+.auth-submit svg { width: 17px; height: 17px; }
+
+.auth-alt { margin: 22px 0 0; text-align: center; font-size: 13px; color: #5b6b80; }
+.auth-link { color: #1f6fd1; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; border-radius: 4px; }
+.auth-link:hover { color: #17558f; }
+
+/* --- Pesan error / sukses (wajib punya aria-live di markup) ------------ */
+.auth-message { display: flex; align-items: flex-start; gap: 9px; margin-top: 18px; padding: 13px 15px; border-radius: 9px; font-size: 13px; line-height: 1.5; }
+.auth-message svg { width: 17px; height: 17px; flex: none; margin-top: 1px; }
+.auth-message.error { background: #fff1f0; border: 1px solid #f3c9c6; color: #b33232; }
+.auth-message.success { background: #e9f8f1; border: 1px solid #bfe5d4; color: #1f7a58; }
+.auth-field-error { display: flex; align-items: center; gap: 6px; margin: 2px 0 0; font-size: 12px; font-weight: 600; color: #b33232; }
+.auth-field-error svg { width: 14px; height: 14px; flex: none; }
+.auth-hint { margin: 2px 0 0; font-size: 12px; line-height: 1.5; color: #5b6b80; }
+
+/* --- Panel akun demo (khusus login) ------------------------------------ */
+.auth-demo { margin-top: 26px; padding-top: 22px; border-top: 1px solid #edf1f6; }
+.auth-demo-head { display: flex; align-items: center; gap: 7px; margin: 0 0 4px; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #5b6b80; }
+.auth-demo-head svg { width: 14px; height: 14px; color: #1f6fd1; }
+.auth-demo > p { margin: 0 0 12px; font-size: 12px; line-height: 1.5; color: #5b6b80; }
+.auth-demo-list { display: flex; flex-direction: column; gap: 8px; }
+.auth-demo-item { display: flex; align-items: center; gap: 11px; width: 100%; min-height: 48px; padding: 9px 12px; text-align: left; border: 1px solid #dfe6ef; border-radius: 9px; background: #fff; transition: border-color .15s, background .15s; }
+.auth-demo-item:hover { border-color: #1c68c9; background: #f4f9ff; }
+.auth-demo-avatar { width: 32px; height: 32px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #1f7a58; background: #e9f8f1; }
+.auth-demo-copy { flex: 1; min-width: 0; }
+.auth-demo-copy strong { display: block; font-size: 12.5px; color: #23324b; }
+.auth-demo-copy span { display: block; margin-top: 2px; font-size: 11px; color: #5b6b80; font-family: Consolas, Monaco, monospace; }
+.auth-demo-role { flex: none; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 999px; color: #1f6fd1; background: #eef5ff; }
+
+/* --- Layar sukses register --------------------------------------------- */
+.auth-success-box { padding: 22px; border: 1px solid #bfe5d4; border-radius: 12px; background: #e9f8f1; }
+.auth-success-box h3 { margin: 12px 0 0; font-size: 17px; color: #1f7a58; }
+.auth-success-box > p { margin: 9px 0 0; font-size: 13px; line-height: 1.6; color: #1f7a58; }
+.auth-success-box ul { margin: 14px 0 0; padding-left: 20px; font-size: 13px; line-height: 1.7; color: #1f7a58; }
+.auth-success-icon { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: #1f7a58; color: #fff; }
+.auth-success-icon svg { width: 22px; height: 22px; stroke-width: 2.6; }
+.auth-badge-pending { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; padding: 7px 12px; border-radius: 999px; background: #fff5df; color: #8a5f00; font-size: 11.5px; font-weight: 700; }
+.auth-badge-pending svg { width: 14px; height: 14px; }
+
+/* --- Focus ring global untuk elemen auth & profil ----------------------- */
+.auth-page :focus-visible, .profile-menu :focus-visible, .user-card:focus-visible, .landing-page :focus-visible { outline: 3px solid #1c68c9; outline-offset: 2px; border-radius: 6px; }
+
+/* --- Dropdown profil pengguna di sidebar -------------------------------- */
+.user-card { width: 100%; border: 0; background: none; text-align: left; cursor: pointer; }
+.user-card:hover { background: #f8fbff; }
+.user-card > svg { transition: transform .18s; }
+.user-card[aria-expanded='true'] > svg { transform: rotate(180deg); }
+.profile-menu { position: relative; }
+.profile-popover { position: absolute; bottom: calc(100% + 8px); left: 8px; right: 8px; z-index: 30; background: #fff; border: 1px solid #e3e9f2; border-radius: 12px; box-shadow: 0 18px 44px #1f35522e; overflow: hidden; }
+.profile-popover-head { padding: 14px 15px 12px; border-bottom: 1px solid #edf1f6; }
+.profile-popover-head strong { display: block; font-size: 13px; color: #1b2a43; }
+.profile-popover-head span { display: block; margin-top: 3px; font-size: 11px; color: #5b6b80; word-break: break-all; }
+.profile-role { display: inline-flex; align-items: center; gap: 5px; margin-top: 9px; padding: 4px 9px; border-radius: 999px; background: #e9f8f1; color: #1f7a58; font-size: 10px; font-weight: 700; }
+.profile-role svg { width: 12px; height: 12px; }
+.profile-logout { display: flex; align-items: center; gap: 9px; width: 100%; min-height: 44px; padding: 11px 15px; border: 0; background: #fff; color: #b33232; font-size: 12.5px; font-weight: 700; text-align: left; }
+.profile-logout:hover { background: #fff1f0; }
+.profile-logout svg { width: 16px; height: 16px; }
+
+/* --- Landing publik di "/" ---------------------------------------------- */
+.landing-page { min-height: 100vh; display: flex; flex-direction: column; background: #f6f8fb; }
+.landing-topbar { padding: 22px 40px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.landing-hero { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 40px 70px; }
+.landing-hero-inner { max-width: 720px; text-align: center; }
+.landing-hero h1 { margin: 0; font-size: 38px; line-height: 1.2; letter-spacing: -1.1px; color: #1b2a43; }
+.landing-hero h1 span { color: #2474db; }
+.landing-hero > div > p { margin: 17px 0 0; font-size: 15px; line-height: 1.65; color: #5b6b80; }
+.landing-actions { margin-top: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.landing-primary, .landing-secondary { min-height: 48px; padding: 13px 26px; border-radius: 9px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+.landing-primary { border: 0; background: #2474db; color: #fff; box-shadow: 0 6px 16px #2474db33; }
+.landing-primary:hover { background: #1c68c9; }
+.landing-secondary { border: 1px solid #1f6fd1; background: #fff; color: #1f6fd1; }
+.landing-secondary:hover { background: #eef5ff; }
+.landing-features { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
+.landing-feature { padding: 20px; background: #fff; border: 1px solid #e3e9f2; border-radius: 12px; }
+.landing-feature svg { width: 20px; height: 20px; color: #1f7a58; }
+.landing-feature strong { display: block; margin-top: 11px; font-size: 13.5px; color: #1b2a43; }
+.landing-feature span { display: block; margin-top: 6px; font-size: 12px; line-height: 1.55; color: #5b6b80; }
+
+/* --- Layar kecil -------------------------------------------------------- */
+@media (max-width: 900px) {
+  .auth-shell { grid-template-columns: 1fr; }
+  .auth-aside { padding: 32px 28px; }
+  .auth-aside h1 { margin-top: 24px; font-size: 22px; }
+  .auth-points { display: none; }
+  .auth-form-wrap { padding: 32px 28px; }
+  .landing-features { grid-template-columns: 1fr; }
+  .landing-hero h1 { font-size: 30px; }
+  .landing-topbar { padding: 18px 20px; }
+  .landing-hero { padding: 10px 20px 50px; }
+  .landing-actions { flex-direction: column; }
+  .landing-primary, .landing-secondary { justify-content: center; }
+}
