@@ -7,23 +7,10 @@ export const metadata: Metadata = {
   title: 'HealTI | Dashboard Apotek',
   description: 'Sistem manajemen inventaris dan transaksi apotek.',
   generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
+  // Favicon & apple-icon diambil dari konvensi file Next.js:
+  //   app/favicon.ico      -> <link rel="icon" sizes="any">
+  //   app/apple-icon.png   -> <link rel="apple-touch-icon">
+  // Jangan menulis blok `icons` di sini, karena akan menimpa konvensi file.
 }
 
 export const viewport: Viewport = {

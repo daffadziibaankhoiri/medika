@@ -187,42 +187,49 @@ export default function AppShell({ children }: { children: ReactNode }) {
             <span>Workspace</span><strong>/</strong>
             <b>{active ? active.label : (currentPermission ? 'Akses ditolak' : 'Dashboard')}</b>
           </div>
-          <div className="top-actions">
-            <div className="top-avatar">{initialsOf(session.name)}</div>
+
+          {/*
+            Semua kontrol kanan dikelompokkan dalam satu wrapper supaya urutannya
+            dikendalikan oleh satu aturan, bukan oleh "space-between" pada
+            .topbar yang membuat tiap anak tersebar ke seluruh lebar.
+          */}
+          <div className="topbar-actions">
             <ThemeToggle />
-          </div>
-          <div className="notification-menu">
-            <button
-              className="icon-button notification-button"
-              onClick={() => setNotificationOpen((open) => !open)}
-              aria-label={`Notifikasi, ${NOTIFICATIONS.length} belum dibaca`}
-              aria-expanded={notificationOpen}
-            >
-              <Bell aria-hidden="true" />
-              <span className="notification-dot" role="status" aria-atomic="true">
-                <span className="sr-only">{NOTIFICATIONS.length} notifikasi belum dibaca</span>
-                <span aria-hidden="true">{NOTIFICATIONS.length}</span>
-              </span>
-            </button>
-            {notificationOpen && (
-              <div className="notification-popover" role="dialog" aria-label="Notifikasi penting">
-                <div className="notification-popover-header">
-                  <div><strong>Notifikasi</strong><span>Perlu perhatian hari ini</span></div>
-                  <button className="link-button" onClick={() => setNotificationOpen(false)}>Tandai dibaca</button>
+            <div className="notification-menu">
+              <button
+                className="icon-button notification-button"
+                onClick={() => setNotificationOpen((open) => !open)}
+                aria-label={`Notifikasi, ${NOTIFICATIONS.length} belum dibaca`}
+                aria-expanded={notificationOpen}
+              >
+                <Bell aria-hidden="true" />
+                <span className="notification-dot" role="status" aria-atomic="true">
+                  <span className="sr-only">{NOTIFICATIONS.length} notifikasi belum dibaca</span>
+                  <span aria-hidden="true">{NOTIFICATIONS.length}</span>
+                </span>
+              </button>
+              {notificationOpen && (
+                <div className="notification-popover" role="dialog" aria-label="Notifikasi penting">
+                  <div className="notification-popover-header">
+                    <div><strong>Notifikasi</strong><span>Perlu perhatian hari ini</span></div>
+                    <button className="link-button" onClick={() => setNotificationOpen(false)}>Tandai dibaca</button>
+                  </div>
+                  <div className="notification-items">
+                    {NOTIFICATIONS.map((item) => (
+                      <div key={item.title} className={`notification-item ${item.tone}`}>
+                        <div className="notification-icon">{item.icon}</div>
+                        <div><strong>{item.title}</strong><span>{item.body}</span><small>{item.time}</small></div>
+                      </div>
+                    ))}
+                  </div>
+                  <button className="notification-footer" onClick={() => setNotificationOpen(false)}>
+                    Lihat semua <Plus aria-hidden="true" />
+                  </button>
                 </div>
-                <div className="notification-items">
-                  {NOTIFICATIONS.map((item) => (
-                    <div key={item.title} className={`notification-item ${item.tone}`}>
-                      <div className="notification-icon">{item.icon}</div>
-                      <div><strong>{item.title}</strong><span>{item.body}</span><small>{item.time}</small></div>
-                    </div>
-                  ))}
-                </div>
-                <button className="notification-footer" onClick={() => setNotificationOpen(false)}>
-                  Lihat semua <Plus aria-hidden="true" />
-                </button>
-              </div>
-            )}
+              )}
+            </div>
+
+            <div className="top-avatar" title={session.name}>{initialsOf(session.name)}</div>
           </div>
         </header>
 

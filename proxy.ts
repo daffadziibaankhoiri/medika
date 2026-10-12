@@ -9,7 +9,7 @@ import { SESSION_COOKIE } from './lib/auth'
  * Ganti seluruhnya dengan verifikasi sesi sungguhan saat produksi.
  */
 
-const PUBLIC_PATHS = new Set(['/', '/login', '/register'])
+const PUBLIC_PATHS = new Set(['/', '/login', '/register', '/__shot.html'])
 
 function hasSession(request: NextRequest): boolean {
   const cookie = request.cookies.get(SESSION_COOKIE)?.value
