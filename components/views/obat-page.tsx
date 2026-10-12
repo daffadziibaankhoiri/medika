@@ -15,7 +15,7 @@ import { useCanViewCostPrice } from '@/lib/use-session'
 
 const PAGE_SIZE = 5
 
-type FilterStatus = 'all' | 'Aman' | 'Segera' | 'Kadaluarsa'
+type FilterStatus = 'all' | 'Aman' | 'Segera' | 'Kadaluwarsa'
 
 type FormBarang = {
   obatId: string
@@ -167,8 +167,8 @@ export default function ObatPage() {
           >
             <option value="all">Semua status</option>
             <option value="Aman">Aman</option>
-            <option value="Segera">Segera kadaluarsa</option>
-            <option value="Kadaluarsa">Kadaluarsa</option>
+            <option value="Segera">Segera Kadaluwarsa</option>
+            <option value="Kadaluwarsa">Kadaluwarsa</option>
           </select>
 
           <button

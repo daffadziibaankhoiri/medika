@@ -1,5 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { THEME_BOOT_SCRIPT } from '@/lib/theme'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -28,8 +29,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: 'light dark',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: '(prefers-color-scheme: light)', color: '#f6f8fb' },
+    { media: '(prefers-color-scheme: dark)', color: '#0d1320' },
   ],
 }
 
@@ -39,7 +40,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
+      <head>
+        {/*
+          Terapkan tema sebelum first paint. Tanpa ini halaman sempat
+          tampil dengan tema yang salah lalu berkedip setelah hydration.
+          dangerouslySetInnerHTML dipakai karena skrip harus inline.
+        */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+      </head>
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

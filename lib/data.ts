@@ -1,12 +1,20 @@
 export const medicines = [
-  { name: 'Amoxicillin 500mg', category: 'Antibiotik', stock: 24, expiry: '12 Apr 2026', status: 'Kadaluarsa', tone: 'danger', price: 18000 },
+  { name: 'Amoxicillin 500mg', category: 'Antibiotik', stock: 24, expiry: '12 Apr 2026', status: 'Kadaluwarsa', tone: 'danger', price: 18000 },
   { name: 'Paracetamol 500mg', category: 'Analgesik', stock: 156, expiry: '28 Nov 2026', status: 'Aman', tone: 'safe', price: 8500 },
   { name: 'Cetirizine 10mg', category: 'Antialergi', stock: 18, expiry: '03 Jun 2026', status: 'Segera', tone: 'warning', price: 12000 },
   { name: 'Omeprazole 20mg', category: 'Lambung', stock: 82, expiry: '16 Jan 2026', status: 'Aman', tone: 'safe', price: 14500 },
   { name: 'Vitamin C 500mg', category: 'Vitamin', stock: 42, expiry: '21 Mei 2026', status: 'Segera', tone: 'warning', price: 22000 },
 ]
 export const categories = ['Antibiotik', 'Analgesik', 'Antialergi', 'Lambung', 'Vitamin']
-export const suppliers = [
+export type Supplier = {
+  name: string
+  contact: string
+  address: string
+  orders: number
+  value: string
+}
+
+export const suppliers: Supplier[] = [
   { name: 'PT Sehat Farma', contact: '021-555-0182', address: 'Jakarta Selatan', orders: 12, value: 'Rp 24.850.000' },
   { name: 'CV Medika Jaya', contact: '0812-8901-2234', address: 'Bandung', orders: 8, value: 'Rp 15.420.000' },
   { name: 'Distributor Kimia Farma', contact: '021-700-2200', address: 'Jakarta Pusat', orders: 6, value: 'Rp 9.840.000' },
@@ -40,16 +48,16 @@ export function costPriceOf(medicineName: string): number {
    ========================================================================== */
 
 /**
- * Tanggal acuan untuk menentukan status kadaluarsa.
+ * Tanggal acuan untuk menentukan status Kadaluwarsa.
  * Dipatok (tidak memakai `new Date()`) supaya status demo stabil dan tidak
  * berubah sendiri setiap hari.
  */
 export const TODAY = '2026-09-14'
 
-/** Batas "Segera Kadaluarsa": masih di bawah 90 hari dari tanggal acuan. */
+/** Batas "Segera Kadaluwarsa": masih di bawah 90 hari dari tanggal acuan. */
 export const SEGERA_HARI = 90
 
-export type BatchStatus = 'Aman' | 'Segera' | 'Kadaluarsa'
+export type BatchStatus = 'Aman' | 'Segera' | 'Kadaluwarsa'
 
 export type Batch = {
   /** No. Batch / Lot dari pabrik. */
@@ -79,17 +87,17 @@ function toTime(date: string): number {
 
 const HARI = 24 * 60 * 60 * 1000
 
-/** Status satu batch: Aman / Segera / Kadaluarsa. */
+/** Status satu batch: Aman / Segera / Kadaluwarsa. */
 export function statusBatch(kedaluwarsa: string, acuan: string = TODAY): BatchStatus {
   const selisih = (toTime(kedaluwarsa) - toTime(acuan)) / HARI
-  if (selisih < 0) return 'Kadaluarsa'
+  if (selisih < 0) return 'Kadaluwarsa'
   if (selisih <= SEGERA_HARI) return 'Segera'
   return 'Aman'
 }
 
 /** 'safe' | 'warning' | 'danger' sesuai gaya badge yang sudah dipakai app. */
 export function toneStatus(status: BatchStatus): 'safe' | 'warning' | 'danger' {
-  if (status === 'Kadaluarsa') return 'danger'
+  if (status === 'Kadaluwarsa') return 'danger'
   if (status === 'Segera') return 'warning'
   return 'safe'
 }
@@ -113,7 +121,7 @@ export function totalStok(batches: Batch[]): number {
 /** Status FEFO sebuah obat: mengikuti batch terdekat kedaluwarsanya. */
 export function statusObat(batches: Batch[], acuan: string = TODAY): BatchStatus {
   const terdekat = batchTerdekat(batches)
-  if (!terdekat) return 'Kadaluarsa'
+  if (!terdekat) return 'Kadaluwarsa'
   return statusBatch(terdekat.kedaluwarsa, acuan)
 }
 
@@ -143,7 +151,7 @@ export function isTanggalValid(date: string): boolean {
 
 /** True bila batch sudah lewat dari tanggal acuan. */
 export function sudahKedaluwarsa(kedaluwarsa: string, acuan: string = TODAY): boolean {
-  return statusBatch(kedaluwarsa, acuan) === 'Kadaluarsa'
+  return statusBatch(kedaluwarsa, acuan) === 'Kadaluwarsa'
 }
 
 /**

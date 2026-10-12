@@ -3,11 +3,13 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import {
-  Bell, Boxes, ClipboardList, FileText, LayoutDashboard, Lock, LogOut, Menu,
-  PackageCheck, Plus, Settings, ShieldX, ShoppingCart, Truck, X, ChevronDown, ShieldCheck,
+  AlertTriangle, Bell, Boxes, CalendarDays, ClipboardList, FileText, LayoutDashboard, Lock,
+  LogOut, Menu, PackageCheck, Plus, Settings, ShieldCheck, ShieldX, ShoppingCart, Truck, X,
+  ChevronDown,
 } from 'lucide-react'
 import { clearSession, initialsOf, readSession, type Session } from '@/lib/auth'
 import { canAccess, permissionFromPath, type Permission } from '@/lib/permissions'
+import { ThemeToggle } from '@/components/theme-toggle'
 import Logo from '@/components/logo'
 
 type NavItem = {
@@ -26,6 +28,18 @@ const NAV_ITEMS: NavItem[] = [
   { path: '/stock-opname', label: 'Stock Opname', icon: ClipboardList, permission: 'stock-opname' },
   { path: '/laporan', label: 'Laporan Penjualan', icon: FileText, permission: 'laporan' },
   { path: '/pengaturan', label: 'Pengaturan', icon: Settings, permission: 'pengaturan' },
+]
+
+/**
+ * Notifikasi topbar.
+ *
+ * Jumlah pada badge dihitung dari isi daftar, bukan angka yang ditulis manual,
+ * supaya badge dan isi popover tidak pernah berbeda.
+ */
+const NOTIFICATIONS = [
+  { tone: 'danger', icon: <AlertTriangle aria-hidden="true" />, title: '2 obat sudah Kadaluwarsa', body: 'Amoxicillin 500mg perlu dipisahkan dari stok aktif.', time: 'Baru saja' },
+  { tone: 'warning', icon: <CalendarDays aria-hidden="true" />, title: '10 obat mendekati kedaluwarsa', body: 'Segera buat rencana retur atau penyesuaian stok.', time: '2 jam lalu' },
+  { tone: 'info', icon: <Boxes aria-hidden="true" />, title: '5 stok obat menipis', body: 'Di bawah batas minimum, siapkan pesanan baru.', time: 'Hari ini' },
 ]
 
 function Brand() {
@@ -173,15 +187,22 @@ export default function AppShell({ children }: { children: ReactNode }) {
             <span>Workspace</span><strong>/</strong>
             <b>{active ? active.label : (currentPermission ? 'Akses ditolak' : 'Dashboard')}</b>
           </div>
-          <div className="top-actions"><div className="top-avatar">{initialsOf(session.name)}</div></div>
+          <div className="top-actions">
+            <div className="top-avatar">{initialsOf(session.name)}</div>
+            <ThemeToggle />
+          </div>
           <div className="notification-menu">
             <button
               className="icon-button notification-button"
               onClick={() => setNotificationOpen((open) => !open)}
-              aria-label="Buka notifikasi"
+              aria-label={`Notifikasi, ${NOTIFICATIONS.length} belum dibaca`}
               aria-expanded={notificationOpen}
             >
-              <Bell aria-hidden="true" /><span className="notification-dot">3</span>
+              <Bell aria-hidden="true" />
+              <span className="notification-dot" role="status" aria-atomic="true">
+                <span className="sr-only">{NOTIFICATIONS.length} notifikasi belum dibaca</span>
+                <span aria-hidden="true">{NOTIFICATIONS.length}</span>
+              </span>
             </button>
             {notificationOpen && (
               <div className="notification-popover" role="dialog" aria-label="Notifikasi penting">
@@ -190,10 +211,12 @@ export default function AppShell({ children }: { children: ReactNode }) {
                   <button className="link-button" onClick={() => setNotificationOpen(false)}>Tandai dibaca</button>
                 </div>
                 <div className="notification-items">
-                  <div className="notification-item danger">
-                    <div className="notification-icon"><Bell aria-hidden="true" /></div>
-                    <div><strong>2 obat sudah kadaluarsa</strong><span>Amoxicillin 500mg perlu dipisahkan dari stok aktif.</span><small>Baru saja</small></div>
-                  </div>
+                  {NOTIFICATIONS.map((item) => (
+                    <div key={item.title} className={`notification-item ${item.tone}`}>
+                      <div className="notification-icon">{item.icon}</div>
+                      <div><strong>{item.title}</strong><span>{item.body}</span><small>{item.time}</small></div>
+                    </div>
+                  ))}
                 </div>
                 <button className="notification-footer" onClick={() => setNotificationOpen(false)}>
                   Lihat semua <Plus aria-hidden="true" />
