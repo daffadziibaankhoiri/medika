@@ -720,6 +720,7 @@ tbody tr:hover { background: var(--surface-hover); }
 .landing-topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px clamp(20px, 5vw, 64px); background: var(--surface); border-bottom: 1px solid var(--border-card); position: sticky; top: 0; z-index: 10; }
 .landing-logo-link { display: inline-flex; border-radius: 10px; }
 .landing-nav { display: flex; align-items: center; gap: 10px; }
+.landing-nav .theme-toggle { margin-right: 4px; }
 .landing-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 8px; font-size: 13.5px; font-weight: 600; color: var(--fg-muted-strong); text-decoration: none; }
 .landing-nav a:hover { background: var(--primary-bg); color: var(--primary-fg); }
 .landing-nav .auth-link { text-decoration: none; }
@@ -996,7 +997,27 @@ tbody tr:hover { background: var(--surface-hover); }
 
 /* Placeholder berukuran sama dengan tombol, supaya topbar tidak melompat
    sesudah hydration ketika tombol tema baru muncul. */
-.theme-toggle-placeholder { display: grid; visibility: hidden; }
+.theme-toggle-placeholder { visibility: hidden; }
+
+/* Tombol tema diberi bingkai dan latar supaya jelas terbaca sebagai kontrol
+   (sebelumnya hanya ikon tanpa pembatas, mudah terlewat). */
+.theme-toggle {
+  border: 1px solid var(--border-control);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+.theme-toggle:hover { background: var(--primary-bg); border-color: var(--primary-border-hover); color: var(--primary); }
+
+/* Halaman auth & landing tidak punya topbar, jadi tombolnya diletakkan
+   di pojok halaman. */
+.auth-page { position: relative; }
+.auth-theme { position: absolute; top: 22px; right: 22px; z-index: 5; }
+
+@media (max-width: 720px) {
+  .auth-theme { top: 12px; right: 12px; }
+  /* Geser form sedikit ke bawah supaya tidak tertutup tombol. */
+  .auth-form-wrap { padding-top: 68px; }
+}
 
 /* --- Skeleton -------------------------------------------------------------
    Lebar mengikuti komponen yang digantikannya supaya halaman tidak "melompat"

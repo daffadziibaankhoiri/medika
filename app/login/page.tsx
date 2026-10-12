@@ -6,6 +6,7 @@ import { AlertCircle, ArrowRight, CheckCircle2, Eye, EyeOff, Info, Plus } from '
 import { authenticate, DEMO_ACCOUNTS, initialsOf, writeSession } from '@/lib/auth'
 import { defaultPathForRole } from '@/lib/permissions'
 import Logo from '@/components/logo'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -47,6 +48,10 @@ export default function LoginPage() {
 
   return (
     <main className="auth-page">
+      {/* Halaman login tidak punya topbar, jadi tombol temanya menempel di
+          sudut kanan atas halaman. */}
+      <div className="auth-theme"><ThemeToggle /></div>
+
       <div className="auth-shell">
         <section className="auth-aside" aria-label="Tentang aplikasi HealTI">
           <Logo size={48} onDark />

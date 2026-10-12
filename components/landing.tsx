@@ -6,6 +6,7 @@ import {
   ArrowRight, Boxes, ClipboardList, FileText, Lock, LogIn, Receipt, ShieldCheck, TrendingUp,
 } from 'lucide-react'
 import Logo from '@/components/logo'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 const FITUR = [
   { icon: TrendingUp, judul: 'Ringkasan Real-time', teks: 'Penjualan, stok, dan obat mendekati kedaluwarsa diperbarui setiap hari.' },
@@ -25,6 +26,7 @@ export function Landing({ onEnter }: { onEnter: () => void }) {
         </Link>
         <nav className="landing-nav" aria-label="Navigasi utama">
           <a href="#fitur">Fitur</a>
+          <ThemeToggle />
           <Link className="auth-link" href="/login">Masuk</Link>
           <Link className="landing-nav-cta" href="/register">Daftar Akun</Link>
         </nav>

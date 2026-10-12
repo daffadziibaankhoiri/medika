@@ -18,7 +18,7 @@ export function ThemeToggle() {
   // supaya tidak sempat menampilkan ikon yang salah.
   useEffect(() => setTheme(currentTheme()), [])
 
-  if (!theme) return <div className="icon-button theme-toggle-placeholder" aria-hidden="true" />
+  if (!theme) return <div className="icon-button theme-toggle theme-toggle-placeholder" aria-hidden="true" />
 
   const next: Theme = theme === 'dark' ? 'light' : 'dark'
   const label = next === 'dark' ? 'Aktifkan mode gelap' : 'Aktifkan mode terang'
@@ -26,7 +26,7 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      className="icon-button"
+      className="icon-button theme-toggle"
       aria-label={label}
       aria-pressed={theme === 'dark'}
       title={label}

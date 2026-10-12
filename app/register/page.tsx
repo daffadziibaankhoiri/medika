@@ -9,6 +9,7 @@ import {
   MIN_PASSWORD_LENGTH,
 } from '@/lib/auth'
 import Logo from '@/components/logo'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 type Errors = Partial<Record<'name' | 'email' | 'password' | 'confirmPassword', string>>
 
@@ -57,6 +58,7 @@ export default function RegisterPage() {
   if (registered) {
     return (
       <main className="auth-page">
+        <div className="auth-theme"><ThemeToggle /></div>
         <div className="auth-shell">
           <section className="auth-aside" aria-label="Tentang aplikasi HealTI">
             <Logo size={48} onDark />
@@ -109,6 +111,7 @@ export default function RegisterPage() {
 
   return (
     <main className="auth-page">
+      <div className="auth-theme"><ThemeToggle /></div>
       <div className="auth-shell">
         <section className="auth-aside" aria-label="Tentang aplikasi HealTI">
           <Logo size={48} onDark />
