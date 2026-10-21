@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import {
   AlertTriangle, Bell, Boxes, CalendarDays, ClipboardList, FileText, LayoutDashboard, Lock,
   LogOut, Menu, PackageCheck, Plus, Settings, ShieldCheck, ShieldX, ShoppingCart, Truck, X,
@@ -84,20 +85,14 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [notificationOpen, setNotificationOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
-  const [path, setPath] = useState('/dashboard')
+  const pathname = usePathname()
+  const path = pathname || '/dashboard'
 
   useEffect(() => {
-    setPath(window.location.pathname || '/dashboard')
     const current = readSession()
     setSession(current)
     setSessionChecked(true)
     if (!current) window.location.assign('/login')
-  }, [])
-
-  useEffect(() => {
-    const onPopState = () => setPath(window.location.pathname || '/dashboard')
-    window.addEventListener('popstate', onPopState)
-    return () => window.removeEventListener('popstate', onPopState)
   }, [])
 
   const logout = () => {
