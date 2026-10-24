@@ -1,11 +1,12 @@
 'use client'
 
-import { AlertTriangle, Boxes, CircleDollarSign, PackageCheck, Truck } from 'lucide-react'
+import { AlertTriangle, Boxes, CircleDollarSign, PackageCheck } from 'lucide-react'
 import { useSession } from '@/lib/use-session'
 import { TODAY } from '@/lib/data'
 import { PageIntro } from '@/components/page-intro'
 import { AlertList, ALERT_TOTAL } from './alert-list'
 import { MedicineSummary } from './medicine-summary'
+import { NotificationPopup } from './notification-popup'
 import { QuickActions } from './quick-actions'
 import { SalesChart } from './sales-chart'
 import { StatCard } from './stat-card'
@@ -45,12 +46,6 @@ export function Dashboard() {
           label="Perlu Perhatian" value={String(ALERT_TOTAL)} hint="obat perlu ditindaklanjuti"
           href="#perlu-perhatian" linkLabel="Lihat daftar obat yang perlu perhatian"
         />
-        <StatCard
-          icon={<Truck />} tone="purple"
-          label="Pesanan Supplier" value="8" hint="pesanan aktif"
-          href="/supplier" linkLabel="Buka manajemen supplier"
-          sparkline={[4, 6, 5, 7, 6, 8]}
-        />
       </section>
 
       <section className="dashboard-grid">
@@ -59,6 +54,8 @@ export function Dashboard() {
       </section>
 
       <MedicineSummary />
+
+      <NotificationPopup />
     </>
   )
 }

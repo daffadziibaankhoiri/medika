@@ -13,6 +13,8 @@
  *    - dan endpoint autentikasi yang benar-benar memverifikasi kredensial.
  */
 
+import { clearDashboardPopupShownFlag } from '@/lib/notifications'
+
 export type Role = 'Owner' | 'Apoteker' | 'Staff Administrasi'
 
 export type DemoAccount = {
@@ -106,12 +108,16 @@ export function readSession(): Session | null {
 export function writeSession(session: Session): void {
   if (typeof document === 'undefined') return
   document.cookie = `${SESSION_COOKIE}=${encodeSession(session)}; path=/; max-age=${SESSION_MAX_AGE}; SameSite=Lax`
+  // Sesi baru: popup notifikasi dashboard boleh tampil lagi.
+  clearDashboardPopupShownFlag()
 }
 
 /** Hapus sesi tiruan dari cookie. */
 export function clearSession(): void {
   if (typeof document === 'undefined') return
   document.cookie = `${SESSION_COOKIE}=; path=/; max-age=0; SameSite=Lax`
+  // Logout: sesi berikutnya harus menampilkan popup notifikasi dari awal.
+  clearDashboardPopupShownFlag()
 }
 
 /** Inisial untuk avatar, maksimal 2 huruf. */

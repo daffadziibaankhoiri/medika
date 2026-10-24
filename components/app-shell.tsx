@@ -4,12 +4,14 @@ import { useEffect, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
-  AlertTriangle, Bell, Boxes, CalendarDays, ClipboardList, FileText, LayoutDashboard, Lock,
+  Bell, Boxes, ClipboardList, FileText, LayoutDashboard, Lock,
   LogOut, Menu, PackageCheck, Plus, Settings, ShieldCheck, ShieldX, ShoppingCart, Truck, X,
   ChevronDown,
 } from 'lucide-react'
 import { clearSession, initialsOf, readSession, type Session } from '@/lib/auth'
 import { canAccess, permissionFromPath, type Permission } from '@/lib/permissions'
+import { OPEN_NOTIFICATIONS_EVENT } from '@/lib/notifications'
+import { NOTIFICATIONS, NotificationList } from '@/components/notifications'
 import { ThemeToggle } from '@/components/theme-toggle'
 import Logo from '@/components/logo'
 
@@ -34,14 +36,9 @@ const NAV_ITEMS: NavItem[] = [
 /**
  * Notifikasi topbar.
  *
- * Jumlah pada badge dihitung dari isi daftar, bukan angka yang ditulis manual,
- * supaya badge dan isi popover tidak pernah berbeda.
+ * Data dan daftar notifikasinya berada di components/notifications.tsx supaya
+ * popup dashboard memakai sumber yang sama.
  */
-const NOTIFICATIONS = [
-  { tone: 'danger', icon: <AlertTriangle aria-hidden="true" />, title: '2 obat sudah Kadaluwarsa', body: 'Amoxicillin 500mg perlu dipisahkan dari stok aktif.', time: 'Baru saja' },
-  { tone: 'warning', icon: <CalendarDays aria-hidden="true" />, title: '10 obat mendekati kedaluwarsa', body: 'Segera buat rencana retur atau penyesuaian stok.', time: '2 jam lalu' },
-  { tone: 'info', icon: <Boxes aria-hidden="true" />, title: '5 stok obat menipis', body: 'Di bawah batas minimum, siapkan pesanan baru.', time: 'Hari ini' },
-]
 
 function Brand() {
   return (
@@ -93,6 +90,16 @@ export default function AppShell({ children }: { children: ReactNode }) {
     setSession(current)
     setSessionChecked(true)
     if (!current) window.location.assign('/login')
+  }, [])
+
+  // Popup notifikasi dashboard memakai tombol "Lihat Semua" untuk membuka
+  // dropdown lengkap di topbar.
+  useEffect(() => {
+    function openNotifications() {
+      setNotificationOpen(true)
+    }
+    window.addEventListener(OPEN_NOTIFICATIONS_EVENT, openNotifications)
+    return () => window.removeEventListener(OPEN_NOTIFICATIONS_EVENT, openNotifications)
   }, [])
 
   const logout = () => {
@@ -209,14 +216,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
                     <div><strong>Notifikasi</strong><span>Perlu perhatian hari ini</span></div>
                     <button className="link-button" onClick={() => setNotificationOpen(false)}>Tandai dibaca</button>
                   </div>
-                  <div className="notification-items">
-                    {NOTIFICATIONS.map((item) => (
-                      <div key={item.title} className={`notification-item ${item.tone}`}>
-                        <div className="notification-icon">{item.icon}</div>
-                        <div><strong>{item.title}</strong><span>{item.body}</span><small>{item.time}</small></div>
-                      </div>
-                    ))}
-                  </div>
+                  <NotificationList items={NOTIFICATIONS} />
                   <button className="notification-footer" onClick={() => setNotificationOpen(false)}>
                     Lihat semua <Plus aria-hidden="true" />
                   </button>
