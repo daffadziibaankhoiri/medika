@@ -1074,3 +1074,76 @@ tbody tr:hover { background: var(--surface-hover); }
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   KELOLA AKUN (/akun)
+   ========================================================================== */
+
+/* Filter status di toolbar tabel. */
+.toolbar-filter { display: flex; align-items: center; gap: 8px; }
+.toolbar-filter-label { color: var(--fg-muted-strong); font-size: 12.5px; font-weight: 600; }
+.filter-select {
+  min-height: 44px; padding: 8px 12px; border: 1px solid var(--border-control);
+  border-radius: 8px; background: var(--surface); color: var(--fg-body);
+  font: inherit; font-size: 13px; cursor: pointer;
+}
+.filter-select:focus-visible { outline: 2px solid var(--ring-primary); border-color: var(--primary-border-focus); }
+
+/* Aksi teks di baris tabel (Setujui, Tolak, Aktifkan/Nonaktifkan).
+   Target sentuh minimal 44px. */
+.row-actions { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.action-link {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 8px;
+  border: 0; border-radius: 8px; background: none; color: var(--primary-link);
+  font-size: 12.5px; font-weight: 600; cursor: pointer;
+}
+.action-link svg { width: 15px; height: 15px; }
+.action-link:hover:not(:disabled) { background: var(--primary-bg); }
+.action-link.danger { color: var(--danger); }
+.action-link.danger:hover:not(:disabled) { background: var(--danger-bg); }
+.action-link:disabled { color: var(--fg-disabled); cursor: not-allowed; }
+.action-link:focus-visible { outline: 2px solid var(--ring-primary); }
+
+/* Penanda akun online: titik + teks, jadi tidak hanya mengandalkan warna. */
+.online-mark { display: inline-flex; align-items: center; gap: 7px; color: var(--success); font-weight: 600; }
+.online-mark i { width: 8px; height: 8px; border-radius: 50%; background: var(--success-dot); }
+
+/* Catatan kecil di dalam sel tabel. */
+.cell-note { display: inline-block; margin-top: 3px; color: var(--fg-muted); font-size: 11.5px; }
+
+/* Kabar berhasil di halaman Kelola Akun. */
+.inline-notice {
+  display: flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 10px 13px;
+  border: 1px solid var(--success-border); border-radius: 9px;
+  background: var(--success-bg); color: var(--success); font-size: 13px; font-weight: 600;
+}
+.inline-notice svg { width: 16px; height: 16px; flex: none; }
+
+/* Catatan kaki panel. */
+.panel-foot-note { margin: 16px 0 0; color: var(--fg-muted); font-size: 12.5px; }
+
+/* Pesan error di dalam dialog. */
+.form-error {
+  display: flex; align-items: flex-start; gap: 8px; margin: 0; padding: 11px 13px;
+  border: 1px solid var(--danger-border); border-radius: 9px;
+  background: var(--danger-bg); color: var(--danger); font-size: 13px; font-weight: 600;
+}
+.form-error svg { width: 16px; height: 16px; flex: none; margin-top: 1px; }
+
+/* Teks penjelas di dalam dialog konfirmasi. */
+.modal-text { margin: 0; color: var(--fg-body); font-size: 13.5px; line-height: 1.6; }
+.modal-text strong { color: var(--fg-heading); }
+
+/* Label input di dialog: selalu terlihat dan punya kontras tinggi. */
+.modal-form .field label { color: var(--fg-body); font-size: 13px; font-weight: 700; }
+
+/* Badge status akun di halaman login. */
+.auth-demo-role svg { width: 12px; height: 12px; vertical-align: -2px; margin-right: 3px; }
+
+/* Pesan informasi (mis. sesi berakhir karena akun dinonaktifkan). */
+.auth-message.info { background: var(--warning-bg); border: 1px solid var(--warning-border); color: var(--warning); }
+
+@media (max-width: 760px) {
+  .toolbar-filter { width: 100%; justify-content: space-between; }
+  .filter-select { flex: 1; }
+}

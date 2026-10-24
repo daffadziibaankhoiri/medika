@@ -2,12 +2,13 @@
 
 import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
-import { AlertCircle, CheckCircle2, Clock, Eye, EyeOff, Plus } from 'lucide-react'
+import { AlertCircle, CheckCircle2, Clock, Eye, EyeOff } from 'lucide-react'
 import {
   DEFAULT_NEW_ACCOUNT_ROLE,
   isValidEmail,
   MIN_PASSWORD_LENGTH,
 } from '@/lib/auth'
+import { createUser } from '@/lib/users'
 import Logo from '@/components/logo'
 import { ThemeToggle } from '@/components/theme-toggle'
 
@@ -22,6 +23,7 @@ export default function RegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
   const [registered, setRegistered] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   function validate(): Errors {
     const next: Errors = {}
@@ -43,15 +45,30 @@ export default function RegisterPage() {
     return next
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const nextErrors = validate()
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length > 0) return
 
-    // DEMO: tidak ada database. Akun baru sengaja tidak dibuatkan sesi dan
-    // tidak dapat login sampai disetujui Owner.
+    setSubmitting(true)
+    // DEMO: akun disimpan di store tiruan localStorage dengan status
+    // "menunggu" sampai disetujui Owner, jadi belum bisa login.
+    const result = await createUser({
+      name,
+      email,
+      password,
+      role: DEFAULT_NEW_ACCOUNT_ROLE,
+      status: 'menunggu',
+    })
+    setSubmitting(false)
+
+    if (!result.ok) {
+      setErrors({ email: result.message })
+      return
+    }
+
     setRegistered(true)
   }
 
@@ -253,8 +270,8 @@ export default function RegisterPage() {
               )}
             </div>
 
-            <button className="auth-submit" type="submit">
-              Buat akun
+            <button className="auth-submit" type="submit" disabled={submitting}>
+              {submitting ? 'Menyimpan…' : 'Buat akun'}
             </button>
           </form>
 

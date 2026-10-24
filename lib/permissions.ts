@@ -18,14 +18,16 @@ export type Permission =
   | 'stock-opname'
   | 'laporan'
   | 'pengaturan'
+  | 'akun'
 
 const ALL_PERMISSIONS: Permission[] = [
-  'dashboard', 'obat', 'kategori', 'kasir', 'supplier', 'stock-opname', 'laporan', 'pengaturan',
+  'dashboard', 'obat', 'kategori', 'kasir', 'supplier', 'stock-opname', 'laporan', 'pengaturan', 'akun',
 ]
 
 /**
  * Menu yang boleh diakses tiap role.
  * Apoteker tidak diberi 'laporan'. Staff hanya empat menu yang disebutkan.
+ * 'akun' (Kelola Akun) hanya untuk Owner.
  */
 const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   Owner: ALL_PERMISSIONS,
@@ -63,6 +65,7 @@ export function permissionFromPath(pathname: string): Permission | null {
     '/stock-opname': 'stock-opname',
     '/laporan': 'laporan',
     '/pengaturan': 'pengaturan',
+    '/akun': 'akun',
   }
   return map[path] ?? null
 }
@@ -78,6 +81,7 @@ export function defaultPathForRole(role: Role): string {
     'stock-opname': '/stock-opname',
     laporan: '/laporan',
     pengaturan: '/pengaturan',
+    akun: '/akun',
   }
   const first = ROLE_PERMISSIONS[role][0]
   return landing[first]

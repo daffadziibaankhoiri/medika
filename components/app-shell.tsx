@@ -5,13 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   Bell, Boxes, ClipboardList, FileText, LayoutDashboard, Lock,
-  LogOut, Menu, PackageCheck, Plus, Settings, ShieldCheck, ShieldX, ShoppingCart, Truck, X,
+  LogOut, Menu, PackageCheck, Plus, Settings, ShieldCheck, ShieldX, ShoppingCart, Truck, Users, X,
   ChevronDown,
 } from 'lucide-react'
-import { clearSession, initialsOf, readSession, type Session } from '@/lib/auth'
+import { checkSession, clearSession, initialsOf, setLoginNotice, type Session } from '@/lib/auth'
 import { canAccess, permissionFromPath, type Permission } from '@/lib/permissions'
 import { OPEN_NOTIFICATIONS_EVENT } from '@/lib/notifications'
 import { NOTIFICATIONS, NotificationList } from '@/components/notifications'
+import { useActiveUserTracker } from '@/lib/use-activity'
 import { ThemeToggle } from '@/components/theme-toggle'
 import Logo from '@/components/logo'
 
@@ -31,6 +32,7 @@ const NAV_ITEMS: NavItem[] = [
   { path: '/stock-opname', label: 'Stock Opname', icon: ClipboardList, permission: 'stock-opname' },
   { path: '/laporan', label: 'Laporan Penjualan', icon: FileText, permission: 'laporan' },
   { path: '/pengaturan', label: 'Pengaturan', icon: Settings, permission: 'pengaturan' },
+  { path: '/akun', label: 'Kelola Akun', icon: Users, permission: 'akun' },
 ]
 
 /**
@@ -85,12 +87,37 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname()
   const path = pathname || '/dashboard'
 
+  // Sesi diperiksa ulang setiap navigasi. Kalau akunnya dinonaktifkan atau
+  // ditolak Owner saat sedang dipakai, sesi langsung diakhiri dan pengguna
+  // diarahkan ke /login dengan pesan yang sesuai.
   useEffect(() => {
-    const current = readSession()
-    setSession(current)
-    setSessionChecked(true)
-    if (!current) window.location.assign('/login')
-  }, [])
+    let cancelled = false
+
+    async function validate() {
+      const result = await checkSession()
+      if (cancelled) return
+
+      if (result.state === 'valid') {
+        setSession(result.session)
+        setSessionChecked(true)
+        return
+      }
+
+      if (result.state === 'rejected') {
+        setLoginNotice(result.message)
+        await clearSession()
+      } else {
+        await clearSession()
+      }
+
+      window.location.assign('/login')
+    }
+
+    validate()
+    return () => {
+      cancelled = true
+    }
+  }, [path])
 
   // Popup notifikasi dashboard memakai tombol "Lihat Semua" untuk membuka
   // dropdown lengkap di topbar.
@@ -102,8 +129,11 @@ export default function AppShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener(OPEN_NOTIFICATIONS_EVENT, openNotifications)
   }, [])
 
-  const logout = () => {
-    clearSession()
+  // Aktivitas terakhir dicatat berkala di satu titik saja (layout utama).
+  useActiveUserTracker(session?.id ?? null)
+
+  const logout = async () => {
+    await clearSession()
     window.location.assign('/login')
   }
 
