@@ -1,8 +1,8 @@
 'use client'
 
-import { AlertTriangle, Boxes, CircleDollarSign, PackageCheck } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { AlertTriangle, CircleDollarSign, PackageCheck } from 'lucide-react'
 import { useSession } from '@/lib/use-session'
-import { TODAY } from '@/lib/data'
 import { PageIntro } from '@/components/page-intro'
 import { AlertList, ALERT_TOTAL } from './alert-list'
 import { MedicineSummary } from './medicine-summary'
@@ -13,16 +13,20 @@ import { StatCard } from './stat-card'
 
 export function Dashboard() {
   const { session } = useSession()
+  const [tanggal, setTanggal] = useState('')
 
-  // Tanggal memakai TODAY (konstan) supaya hasil render server dan client sama.
-  const tanggal = new Date(`${TODAY}T00:00:00`).toLocaleDateString('id-ID', {
-    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
-  })
+  useEffect(() => {
+    setTanggal(
+      new Date().toLocaleDateString('id-ID', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+      }).toUpperCase(),
+    )
+  }, [])
 
   return (
     <>
       <PageIntro
-        eyebrow={tanggal.toUpperCase()}
+        eyebrow={tanggal}
         title={`Halo, ${session ? session.name : 'Pengguna'}`}
         subtitle="Berikut ringkasan kondisi apotek Anda hari ini."
         action={<QuickActions />}
