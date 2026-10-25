@@ -2,16 +2,19 @@
 
 import { Fragment, useMemo, useState } from 'react'
 import {
-  ChevronDown, ChevronRight, PackagePlus, Search, SlidersHorizontal,
+  ChevronDown, ChevronRight, PackagePlus, Search, SlidersHorizontal, Undo2,
 } from 'lucide-react'
 import { Button, DataTable, Field, Modal, Status } from '@/components/ui'
 import { PageIntro } from '@/components/page-intro'
+import { SupplierReturnDialog } from '@/components/returns/supplier-return-dialog'
 import {
   batchTerdekat, categories, costPriceOf, formatTanggal, isTanggalValid, money, obatList,
   sisaHari, statusBatch, statusObat, suppliers, toneStatus, totalStok, urutBatchFEFO,
   type Obat,
 } from '@/lib/data'
 import { useCanViewCostPrice } from '@/lib/use-session'
+import { useReturns } from '@/lib/use-returns'
+import { obatDenganStokRetur } from '@/lib/returns'
 
 const PAGE_SIZE = 5
 
@@ -35,9 +38,11 @@ const FORM_KOSONG: FormBarang = {
 
 export default function ObatPage() {
   const showCostPrice = useCanViewCostPrice()
+  const { daftar: retur } = useReturns()
 
   const [rows, setRows] = useState<Obat[]>(obatList)
   const [expanded, setExpanded] = useState<string | null>(null)
+  const [dialogRetur, setDialogRetur] = useState<{ obatId: string; nomorBatch: string } | null>(null)
 
   const [query, setQuery] = useState('')
   const [kategori, setKategori] = useState('all')
@@ -48,9 +53,11 @@ export default function ObatPage() {
   const [form, setForm] = useState<FormBarang>(FORM_KOSONG)
   const [pesan, setPesan] = useState<{ tone: 'error' | 'success'; teks: string } | null>(null)
 
+  const rowsEfektif = useMemo(() => obatDenganStokRetur(rows, retur), [rows, retur])
+
   const terfilter = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return rows.filter((obat) => {
+    return rowsEfektif.filter((obat) => {
       const cocokCari =
         q === '' ||
         obat.nama.toLowerCase().includes(q) ||
@@ -60,7 +67,7 @@ export default function ObatPage() {
       const cocokStatus = status === 'all' || statusObat(obat.batches) === status
       return cocokCari && cocokKategori && cocokStatus
     })
-  }, [rows, query, kategori, status])
+  }, [rowsEfektif, query, kategori, status])
 
   const totalHalaman = Math.max(1, Math.ceil(terfilter.length / PAGE_SIZE))
   const halamanAman = Math.min(page, totalHalaman)
@@ -106,7 +113,7 @@ export default function ObatPage() {
               ...obat,
               batches: [
                 ...obat.batches,
-                { lot: form.lot.trim(), masuk: '2026-09-14', kedaluwarsa: form.kedaluwarsa, stok: jumlah },
+                { lot: form.lot.trim(), masuk: '2026-09-14', kedaluwarsa: form.kedaluwarsa, stok: jumlah, supplier: namaSupplier },
               ],
             }
           : obat,
@@ -244,6 +251,7 @@ export default function ObatPage() {
                                 <th scope="col">Tanggal Kedaluwarsa</th>
                                 <th scope="col">Stok Batch</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -262,6 +270,18 @@ export default function ObatPage() {
                                     </td>
                                     <td><strong>{batch.stok}</strong> unit</td>
                                     <td><Status tone={toneStatus(statusBatchIni)}>{statusBatchIni}</Status></td>
+                                    <td>
+                                      {statusBatchIni === 'Kadaluwarsa' && (
+                                        <button
+                                          className="outline-button retur-batch-button"
+                                          type="button"
+                                          onClick={() => setDialogRetur({ obatId: obat.id, nomorBatch: batch.lot })}
+                                          aria-label={`Ajukan retur batch ${batch.lot} ${obat.nama}`}
+                                        >
+                                          <Undo2 aria-hidden="true" /> Ajukan Retur
+                                        </button>
+                                      )}
+                                    </td>
                                   </tr>
                                 )
                               })}
@@ -316,6 +336,15 @@ export default function ObatPage() {
           </div>
         </div>
       </section>
+
+      {dialogRetur && (
+        <SupplierReturnDialog
+          initialObatId={dialogRetur.obatId}
+          initialNomorBatch={dialogRetur.nomorBatch}
+          onClose={() => setDialogRetur(null)}
+          onSubmitted={(retur) => setPesan({ tone: 'success', teks: `Pengajuan retur ${retur.nomorRetur} berhasil dibuat.` })}
+        />
+      )}
 
       {formTerbuka && (
         <Modal title="Terima Barang Masuk" description="Catat batch obat baru yang diterima dari supplier." onClose={() => setFormTerbuka(false)}>

@@ -68,6 +68,7 @@ export type Batch = {
   kedaluwarsa: string
   /** Sisa stok batch ini. */
   stok: number
+  supplier?: string
 }
 
 export type Obat = {
@@ -178,59 +179,59 @@ export const obatList: Obat[] = [
   {
     id: 'obt-001', nama: 'Amoxicillin 500mg', sku: 'OBT-AMD-001', kategori: 'Antibiotik', hargaJual: 18000,
     batches: [
-      { lot: 'LOT-2409-A', masuk: '2025-11-05', kedaluwarsa: '2026-08-30', stok: 8 },
-      { lot: 'LOT-2503-B', masuk: '2026-03-12', kedaluwarsa: '2027-03-11', stok: 16 },
+      { lot: 'LOT-2409-A', masuk: '2025-11-05', kedaluwarsa: '2026-08-30', stok: 8, supplier: 'CV Medika Jaya' },
+      { lot: 'LOT-2503-B', masuk: '2026-03-12', kedaluwarsa: '2027-03-11', stok: 16, supplier: 'PT Sehat Farma' },
     ],
   },
   {
     id: 'obt-002', nama: 'Paracetamol 500mg', sku: 'OBT-PRC-002', kategori: 'Analgesik', hargaJual: 8500,
     batches: [
-      { lot: 'LOT-2410-A', masuk: '2025-12-01', kedaluwarsa: '2026-11-28', stok: 60 },
-      { lot: 'LOT-2502-B', masuk: '2026-02-18', kedaluwarsa: '2027-02-17', stok: 56 },
-      { lot: 'LOT-2506-C', masuk: '2026-06-10', kedaluwarsa: '2028-06-09', stok: 40 },
+      { lot: 'LOT-2410-A', masuk: '2025-12-01', kedaluwarsa: '2026-11-28', stok: 60, supplier: 'PT Sehat Farma' },
+      { lot: 'LOT-2502-B', masuk: '2026-02-18', kedaluwarsa: '2027-02-17', stok: 56, supplier: 'CV Medika Jaya' },
+      { lot: 'LOT-2506-C', masuk: '2026-06-10', kedaluwarsa: '2028-06-09', stok: 40, supplier: 'Distributor Kimia Farma' },
     ],
   },
   {
     id: 'obt-003', nama: 'Cetirizine 10mg', sku: 'OBT-CET-003', kategori: 'Antialergi', hargaJual: 12000,
     batches: [
-      { lot: 'LOT-2412-A', masuk: '2026-01-09', kedaluwarsa: '2026-10-05', stok: 12 },
-      { lot: 'LOT-2505-B', masuk: '2026-05-20', kedaluwarsa: '2027-05-19', stok: 6 },
+      { lot: 'LOT-2412-A', masuk: '2026-01-09', kedaluwarsa: '2026-10-05', stok: 12, supplier: 'CV Medika Jaya' },
+      { lot: 'LOT-2505-B', masuk: '2026-05-20', kedaluwarsa: '2027-05-19', stok: 6, supplier: 'Distributor Kimia Farma' },
     ],
   },
   {
     id: 'obt-004', nama: 'Omeprazole 20mg', sku: 'OBT-OMP-004', kategori: 'Lambung', hargaJual: 14500,
     batches: [
-      { lot: 'LOT-2501-A', masuk: '2025-10-15', kedaluwarsa: '2027-01-14', stok: 45 },
-      { lot: 'LOT-2507-B', masuk: '2026-07-02', kedaluwarsa: '2028-07-01', stok: 37 },
+      { lot: 'LOT-2501-A', masuk: '2025-10-15', kedaluwarsa: '2027-01-14', stok: 45, supplier: 'Distributor Kimia Farma' },
+      { lot: 'LOT-2507-B', masuk: '2026-07-02', kedaluwarsa: '2028-07-01', stok: 37, supplier: 'PT Sehat Farma' },
     ],
   },
   {
     id: 'obt-005', nama: 'Ibuprofen 400mg', sku: 'OBT-IBU-005', kategori: 'Analgesik', hargaJual: 13500,
     batches: [
-      { lot: 'LOT-2503-X', masuk: '2026-03-02', kedaluwarsa: '2028-02-28', stok: 70 },
-      { lot: 'LOT-2507-Y', masuk: '2026-07-15', kedaluwarsa: '2027-07-14', stok: 44 },
+      { lot: 'LOT-2503-X', masuk: '2026-03-02', kedaluwarsa: '2028-02-28', stok: 70, supplier: 'PT Sehat Farma' },
+      { lot: 'LOT-2507-Y', masuk: '2026-07-15', kedaluwarsa: '2027-07-14', stok: 44, supplier: 'CV Medika Jaya' },
     ],
   },
   {
     id: 'obt-006', nama: 'Loratadine 10mg', sku: 'OBT-LOR-006', kategori: 'Antialergi', hargaJual: 11000,
     batches: [
-      { lot: 'LOT-2502-L', masuk: '2026-02-01', kedaluwarsa: '2027-01-31', stok: 55 },
-      { lot: 'LOT-2506-M', masuk: '2026-06-20', kedaluwarsa: '2026-12-15', stok: 30 },
+      { lot: 'LOT-2502-L', masuk: '2026-02-01', kedaluwarsa: '2027-01-31', stok: 55, supplier: 'CV Medika Jaya' },
+      { lot: 'LOT-2506-M', masuk: '2026-06-20', kedaluwarsa: '2026-12-15', stok: 30, supplier: 'Distributor Kimia Farma' },
     ],
   },
   {
     id: 'obt-007', nama: 'Vitamin C 500mg', sku: 'OBT-VTC-007', kategori: 'Vitamin', hargaJual: 22000,
     batches: [
-      { lot: 'LOT-2411-C', masuk: '2025-11-20', kedaluwarsa: '2026-08-15', stok: 6 },
-      { lot: 'LOT-2504-A', masuk: '2026-04-11', kedaluwarsa: '2026-09-30', stok: 22 },
-      { lot: 'LOT-2508-B', masuk: '2026-08-01', kedaluwarsa: '2027-07-31', stok: 14 },
+      { lot: 'LOT-2411-C', masuk: '2025-11-20', kedaluwarsa: '2026-08-15', stok: 6, supplier: 'Distributor Kimia Farma' },
+      { lot: 'LOT-2504-A', masuk: '2026-04-11', kedaluwarsa: '2026-09-30', stok: 22, supplier: 'PT Sehat Farma' },
+      { lot: 'LOT-2508-B', masuk: '2026-08-01', kedaluwarsa: '2027-07-31', stok: 14, supplier: 'CV Medika Jaya' },
     ],
   },
   {
     id: 'obt-008', nama: 'ORS Powder', sku: 'OBT-ORS-008', kategori: 'Vitamin', hargaJual: 6500,
     batches: [
-      { lot: 'LOT-2504-P', masuk: '2026-04-25', kedaluwarsa: '2026-10-20', stok: 65 },
-      { lot: 'LOT-2508-O', masuk: '2026-08-05', kedaluwarsa: '2027-08-04', stok: 120 },
+      { lot: 'LOT-2504-P', masuk: '2026-04-25', kedaluwarsa: '2026-10-20', stok: 65, supplier: 'CV Medika Jaya' },
+      { lot: 'LOT-2508-O', masuk: '2026-08-05', kedaluwarsa: '2027-08-04', stok: 120, supplier: 'Distributor Kimia Farma' },
     ],
   },
   {
@@ -238,8 +239,8 @@ export const obatList: Obat[] = [
     // Dipakai untuk mendemonstrasikan pemblokiran transaksi di halaman /kasir.
     id: 'obt-009', nama: 'Tetracycline 250mg', sku: 'OBT-TET-009', kategori: 'Antibiotik', hargaJual: 9800,
     batches: [
-      { lot: 'LOT-2408-X', masuk: '2024-08-10', kedaluwarsa: '2026-03-12', stok: 14 },
-      { lot: 'LOT-2412-Y', masuk: '2024-12-02', kedaluwarsa: '2026-06-18', stok: 9 },
+      { lot: 'LOT-2408-X', masuk: '2024-08-10', kedaluwarsa: '2026-03-12', stok: 14, supplier: 'PT Sehat Farma' },
+      { lot: 'LOT-2412-Y', masuk: '2024-12-02', kedaluwarsa: '2026-06-18', stok: 9, supplier: 'Distributor Kimia Farma' },
     ],
   },
 ]

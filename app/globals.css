@@ -501,12 +501,30 @@ button { cursor: pointer; }
 .riwayat-adjustment p { margin: 4px 0 0; font-size: 12px; color: var(--fg-muted); }
 
 /* --- Retur ke supplier --- */
+.status-pill.info { background: var(--primary-bg); color: var(--primary-fg); }
+.status-pill.info i { background: var(--primary); }
+.retur-panel-header { align-items: center; gap: 18px; }
+.retur-panel-header .primary-button { flex: none; }
+.retur-toolbar { align-items: flex-end; }
+.retur-toolbar .search-box { flex: 1 1 280px; }
+.retur-riwayat-panel { margin-top: 20px; }
+.retur-riwayat-panel code { color: var(--fg-body); font-family: var(--font-mono); font-size: 12px; }
 .retur-form .form-grid { gap: 14px; }
 .retur-form select, .retur-form input[type='number'], .retur-form input[type='text'] { min-height: 44px; }
 .retur-form select:disabled { background: var(--surface-3); color: var(--fg-muted); }
 .retur-info { display: flex; align-items: flex-start; gap: 9px; padding: 12px 14px; border: 1px solid var(--warning-border); border-radius: 9px; background: var(--warning-bg); font-size: 12.5px; line-height: 1.55; color: var(--warning); }
 .retur-info svg { width: 17px; height: 17px; flex: none; margin-top: 1px; color: var(--warning); }
 .retur-alasan-cell { max-width: 230px; font-size: 11.5px; line-height: 1.5; color: var(--fg-muted); }
+.retur-alasan-cell strong, .retur-alasan-cell span { display: block; }
+.retur-alasan-cell strong { margin-bottom: 3px; color: var(--fg-body); font-size: 12.5px; }
+.retur-id-batch { display: block; margin-top: 4px; color: var(--fg-muted); font-family: var(--font-mono); font-size: 10.5px; }
+.retur-history-table { min-width: 1280px; }
+.retur-history-table td { vertical-align: top; }
+.retur-batch-button { width: auto; white-space: nowrap; }
+@media (max-width: 600px) {
+  .retur-panel-header { align-items: stretch; flex-direction: column; }
+  .retur-panel-header .primary-button { width: 100%; justify-content: center; }
+}
 
 /* --- Notifikasi Kedaluwarsa (/pengaturan) --- */
 .notifikasi-panel .panel-header h2 { display: flex; align-items: center; gap: 9px; }

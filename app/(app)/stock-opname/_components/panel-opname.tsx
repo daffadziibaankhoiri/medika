@@ -6,9 +6,12 @@ import {
 } from 'lucide-react'
 import { Button, DataTable, Status } from '@/components/ui'
 import { categories, obatList, statusObat, toneStatus, totalStok, type Obat } from '@/lib/data'
+import { obatDenganStokRetur } from '@/lib/returns'
+import { useReturns } from '@/lib/use-returns'
 import { AREA, type BarisOpname } from './types'
 
 export function PanelOpname() {
+  const { daftar: retur } = useReturns()
   const [area, setArea] = useState(AREA[0])
   const [kategori, setKategori] = useState('all')
   const [query, setQuery] = useState('')
@@ -28,15 +31,25 @@ export function PanelOpname() {
     'obt-007': 41,
   }))
 
+  const barisEfektif = useMemo(() => {
+    const obatEfektif = new Map(
+      obatDenganStokRetur(obatList, retur).map((obat) => [obat.id, obat]),
+    )
+    return baris.map((row) => ({
+      ...row,
+      obat: obatEfektif.get(row.obat.id) ?? row.obat,
+    }))
+  }, [baris, retur])
+
   const daftar = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return baris.filter(({ obat }) => {
+    return barisEfektif.filter(({ obat }) => {
       const cocokTeks =
         q === '' || obat.nama.toLowerCase().includes(q) || obat.sku.toLowerCase().includes(q)
       const cocokKategori = kategori === 'all' || obat.kategori === kategori
       return cocokTeks && cocokKategori
     })
-  }, [baris, query, kategori])
+  }, [barisEfektif, query, kategori])
 
   const sistem = (obat: Obat) => totalStok(obat.batches)
   const fisik = (row: BarisOpname) => {
