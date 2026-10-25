@@ -11,6 +11,7 @@ import {
   semuaBatchKedaluwarsa, statusBatch, type Obat,
 } from '@/lib/data'
 import { useSession } from '@/lib/use-session'
+import { useAlert } from '@/lib/use-alert'
 
 type CartItem = {
   id: string
@@ -24,6 +25,7 @@ type CartItem = {
 
 export default function Kasir() {
   const { session } = useSession()
+  const alert = useAlert()
   const [cart, setCart] = useState<CartItem[]>([])
   const [search, setSearch] = useState('')
   const [ditolak, setDitolak] = useState<string[]>([])
@@ -249,7 +251,7 @@ export default function Kasir() {
               if (!simpanNonaktif) {
                 setCart([])
                 setDitolak([])
-                alert('Transaksi berhasil disimpan')
+                alert.success('Transaksi berhasil disimpan')
               }
             }}
           >

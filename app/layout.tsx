@@ -1,5 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { AlertProvider } from '@/components/alert-provider'
 import { THEME_BOOT_SCRIPT } from '@/lib/theme'
 import './globals.css'
 
@@ -37,7 +38,9 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
       </head>
       <body className="antialiased">
-        {children}
+        <AlertProvider>
+          {children}
+        </AlertProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
