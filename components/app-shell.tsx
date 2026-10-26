@@ -33,6 +33,7 @@ const NAV_ITEMS: NavItem[] = [
   { path: '/laporan', label: 'Laporan Penjualan', icon: FileText, permission: 'laporan' },
   { path: '/pengaturan', label: 'Pengaturan', icon: Settings, permission: 'pengaturan' },
   { path: '/akun', label: 'Kelola Akun', icon: Users, permission: 'akun' },
+  { path: '/notifikasi', label: 'Notifikasi', icon: Bell, permission: 'notifikasi' },
 ]
 
 /**

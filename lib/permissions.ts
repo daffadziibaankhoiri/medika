@@ -19,9 +19,10 @@ export type Permission =
   | 'laporan'
   | 'pengaturan'
   | 'akun'
+  | 'notifikasi'
 
 const ALL_PERMISSIONS: Permission[] = [
-  'dashboard', 'obat', 'kategori', 'kasir', 'supplier', 'stock-opname', 'laporan', 'pengaturan', 'akun',
+  'dashboard', 'obat', 'kategori', 'kasir', 'supplier', 'stock-opname', 'laporan', 'pengaturan', 'akun', 'notifikasi',
 ]
 
 /**
@@ -31,8 +32,8 @@ const ALL_PERMISSIONS: Permission[] = [
  */
 const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   Owner: ALL_PERMISSIONS,
-  Apoteker: ['dashboard', 'obat', 'kategori', 'kasir', 'supplier', 'stock-opname', 'pengaturan'],
-  'Staff Administrasi': ['obat', 'kasir', 'supplier', 'stock-opname'],
+  Apoteker: ALL_PERMISSIONS,
+  'Staff Administrasi': ['obat', 'kasir', 'supplier', 'stock-opname', 'notifikasi'],
 }
 
 /** Apakah role punya akses ke sebuah menu/rute? */
@@ -66,6 +67,7 @@ export function permissionFromPath(pathname: string): Permission | null {
     '/laporan': 'laporan',
     '/pengaturan': 'pengaturan',
     '/akun': 'akun',
+    '/notifikasi': 'notifikasi',
   }
   return map[path] ?? null
 }
@@ -82,6 +84,7 @@ export function defaultPathForRole(role: Role): string {
     laporan: '/laporan',
     pengaturan: '/pengaturan',
     akun: '/akun',
+    notifikasi: '/notifikasi',
   }
   const first = ROLE_PERMISSIONS[role][0]
   return landing[first]
