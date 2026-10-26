@@ -101,12 +101,6 @@ export function NotifikasiPage() {
               </td>
               <td>
                 <div className="truncate max-w-xs">{row.title}</div>
-                <button
-                  onClick={() => row.setExpanded(row.key)}
-                  className="text-sm text-primary hover:underline mt-1 block"
-                >
-                  {row.expanded ? 'Sembunyikan detail' : 'Lihat detail'}
-                </button>
               </td>
               <td>
                 {row.expanded && (
@@ -115,7 +109,14 @@ export function NotifikasiPage() {
                   </div>
                 )}
               </td>
-              <td />
+              <td>
+                <button
+                  onClick={() => row.setExpanded(row.key)}
+                  className="text-sm text-primary hover:underline"
+                >
+                  {row.expanded ? 'Sembunyikan detail' : 'Lihat detail'}
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
